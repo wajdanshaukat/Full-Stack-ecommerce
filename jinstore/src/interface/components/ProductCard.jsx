@@ -59,13 +59,13 @@ const ProductCard = ({ product }) => {
       {/* Wishlist Button */}
       <button
         aria-label="Toggle Wishlist"
-        className="absolute top-3 right-3"
+        className="absolute top-3 right-3 z-10"
         onClick={handleWishlistClick}
       >
         <Heart
           size={20}
           className={`transition ${
-            isProductInWishlist(product.id) ? "text-red-500 fill-red-500" : "text-gray-400"
+            isProductInWishlist(product.id) ? "text-red-500 fill-red-500" : "text-gray-400 cursor-pointer"
           } hover:text-red-500`}
         />
       </button>
@@ -95,7 +95,7 @@ const ProductCard = ({ product }) => {
 
       {/* Add to Cart Button */}
       <button
-        className="mt-2 w-full bg-blue-500 text-white py-1.5 rounded text-sm flex items-center justify-center gap-1 hover:bg-blue-600 transition"
+        className="mt-2 w-full bg-blue-500 text-white py-1.5 rounded text-sm flex items-center justify-center gap-1 hover:bg-blue-600 transition cursor-pointer"
         onClick={handleAddToCart}
       >
         <ShoppingCart size={16} /> Add to cart

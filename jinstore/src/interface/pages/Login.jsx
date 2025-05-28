@@ -21,13 +21,33 @@ const LoginForm = () => {
       );
 
       const token = res.data.access_token;
-      if (rememberMe) localStorage.setItem("authToken", token);
-      await login(token); // fetch profile inside login()
+
+      if (rememberMe) {
+        localStorage.setItem("authToken", token);
+      }
+
+      const profileRes = await axios.get("http://localhost:8000/protected/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const userData = profileRes.data;
+
+      await login(userData, token);
 
       toast.success("Welcome back!");
 
-      // Redirect to CompleteProfilePage regardless of userType
-      navigate("/complete-profile");
+      // ✅ Check if profile is complete
+      const isProfileComplete = userData.first_name && userData.last_name;
+
+      if (!isProfileComplete) {
+        navigate("/complete-profile");
+      } else if (userData.user_type === "vendor") {
+        navigate("/dashboard");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
       toast.error("Login failed. Please check your credentials.");
@@ -85,7 +105,7 @@ const LoginForm = () => {
 
           <button
             type="submit"
-            className="w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-800 transition"
+            className="w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-800 transition cursor-pointer"
           >
             Log in
           </button>

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from datetime import datetime
 from typing import List
 
@@ -49,10 +49,35 @@ def get_my_orders(db: Session = Depends(get_db), current_user: User = Depends(ge
 
 @router.get("/{order_id}", response_model=UserOrder)
 def get_order(order_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    order = db.query(UserOrderModel).filter(UserOrderModel.id == order_id, UserOrderModel.user_id == current_user.id).first()
+    order = (db.query(UserOrderModel)
+             .options(joinedload(UserOrderModel.order_details))
+             .filter(UserOrderModel.id == order_id, UserOrderModel.user_id == current_user.id).first())
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
     return order
+
+
+@router.delete("/delete_all_orders", status_code=status.HTTP_200_OK)
+def delete_all_orders_and_details(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    # Get all user orders
+    user_orders = db.query(UserOrderModel).filter(UserOrderModel.user_id == current_user.id).all()
+    order_ids = [order.id for order in user_orders]
+
+    if not order_ids:
+        return {"detail": "No orders found to delete."}
+
+    # Delete all order details linked to these orders
+    db.query(OrderDetailModel).filter(OrderDetailModel.order_id.in_(order_ids)).delete(synchronize_session=False)
+
+    # Delete all user orders
+    db.query(UserOrderModel).filter(UserOrderModel.id.in_(order_ids)).delete(synchronize_session=False)
+
+    db.commit()
+    return {"detail": f"Deleted {len(order_ids)} orders and their details."}
+
 
 
 @router.delete("/{order_id}")

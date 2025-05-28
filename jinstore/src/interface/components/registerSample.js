@@ -20,7 +20,7 @@ const SignUp = () => {
       });
 
       if (userType === "vendor") {
-        navigate("/vendor/dashboard");
+        navigate("/dashboard");
       } else {
         navigate("/");
       }

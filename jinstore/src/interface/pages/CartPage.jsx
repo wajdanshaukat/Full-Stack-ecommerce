@@ -60,7 +60,7 @@ const CartPage = () => {
   );
 
   return (
-    <div className="bg-white min-h-screen px-4 py-12 relative">
+    <div className="bg-white px-4 py-12 relative">
       {/* Breadcrumbs */}
       <div className="absolute top-4 left-4 text-sm text-gray-500">
         <Breadcrumbs />
@@ -116,7 +116,7 @@ const CartPage = () => {
                 <div className="flex items-center justify-center gap-4 text-lg">
                   <button
                     onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                    className="text-black hover:text-gray-600"
+                    className="text-black hover:text-gray-600 cursor-pointer"
                     disabled={item.quantity <= 1}
                   >
                     ❮
@@ -124,7 +124,7 @@ const CartPage = () => {
                   <span>{item.quantity}</span>
                   <button
                     onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                    className="text-black hover:text-gray-600"
+                    className="text-black hover:text-gray-600 cursor-pointer"
                   >
                     ❯
                   </button>
@@ -144,7 +144,7 @@ const CartPage = () => {
                 <div className="text-center">
                   <button
                     onClick={() => handleRemove(item.id, item.name)}
-                    className="text-black text-[30px] hover:text-red-500"
+                    className="text-black text-[30px] hover:text-red-500 cursor-pointer"
                   >
                     ×
                   </button>

@@ -11,11 +11,9 @@ const AddressForm = ({
 
   useEffect(() => {
     if (!user) return;
-
-    // Prefill ONLY if form data is empty (all blank)
     if (
       !isShipping &&
-      Object.values(data).every(val => val === "" || val === "Pakistan")
+      Object.values(data).every((val) => val === "" || val === "Pakistan")
     ) {
       const prefillFields = {
         firstName: user.first_name || "",
@@ -42,7 +40,9 @@ const AddressForm = ({
       {/* your full form as is, unchanged */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="text-sm font-medium text-gray-700">First name *</label>
+          <label className="text-sm font-medium text-gray-700">
+            First name *
+          </label>
           <input
             type="text"
             name="firstName"
@@ -52,7 +52,9 @@ const AddressForm = ({
           />
         </div>
         <div>
-          <label className="text-sm font-medium text-gray-700">Last name *</label>
+          <label className="text-sm font-medium text-gray-700">
+            Last name *
+          </label>
           <input
             type="text"
             name="lastName"
@@ -64,7 +66,9 @@ const AddressForm = ({
       </div>
 
       <div>
-        <label className="text-sm font-medium text-gray-700">Company name</label>
+        <label className="text-sm font-medium text-gray-700">
+          Company name
+        </label>
         <input
           type="text"
           name="companyName"
@@ -91,7 +95,9 @@ const AddressForm = ({
       </div>
 
       <div>
-        <label className="text-sm font-medium text-gray-700">Street address *</label>
+        <label className="text-sm font-medium text-gray-700">
+          Street address *
+        </label>
         <input
           type="text"
           name="streetAddress"
@@ -111,7 +117,9 @@ const AddressForm = ({
       </div>
 
       <div>
-        <label className="text-sm font-medium text-gray-700">Town / City *</label>
+        <label className="text-sm font-medium text-gray-700">
+          Town / City *
+        </label>
         <input
           type="text"
           name="town"
@@ -133,7 +141,9 @@ const AddressForm = ({
           />
         </div>
         <div>
-          <label className="text-sm font-medium text-gray-700">ZIP Code *</label>
+          <label className="text-sm font-medium text-gray-700">
+            ZIP Code *
+          </label>
           <input
             type="text"
             name="zipCode"
@@ -156,14 +166,21 @@ const AddressForm = ({
       </div>
 
       <div>
-        <label className="text-sm font-medium text-gray-700">Email address *</label>
+        <label className="text-sm font-medium text-gray-700">
+          Email address *
+        </label>
         <input
           type="email"
           name="email"
           value={data.email}
           onChange={(e) => handleChange(e, isShipping)}
-          className="mt-1 block w-full border px-4 py-2 rounded-md"
+          className={`mt-1 block w-full border px-4 py-2 rounded-md`}
           disabled={disabledEmail}
+          title={
+            disabledEmail
+              ? "Email is fetched from your account and cannot be edited."
+              : ""
+          }
         />
       </div>
     </>

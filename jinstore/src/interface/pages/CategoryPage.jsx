@@ -49,7 +49,7 @@ const CategoryPage = () => {
   if (loading) return <div className="p-4 text-gray-500">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <div className="bg-gray-50 p-4 md:p-8">
       {/* Banner Section */}
       <div>
         <h2 className="text-2xl md:text-3xl text-black font-bold mb-4 ">

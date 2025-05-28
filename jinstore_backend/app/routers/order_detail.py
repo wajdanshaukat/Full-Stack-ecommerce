@@ -84,6 +84,26 @@ def update_order_detail(
     return detail
 
 
+@router.delete("/delete_all_details", status_code=status.HTTP_200_OK)
+def delete_all_order_details_for_user(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    # Get all order IDs for the current user
+    user_order_ids = db.query(UserOrderModel.id).filter(UserOrderModel.user_id == current_user.id).all()
+    order_ids = [order_id for (order_id,) in user_order_ids]
+
+    if not order_ids:
+        return {"detail": "No orders found for the current user."}
+
+    # Delete all order details linked to those orders
+    deleted = db.query(OrderDetailModel).filter(OrderDetailModel.order_id.in_(order_ids)).delete(synchronize_session=False)
+
+    db.commit()
+    return {"detail": f"Deleted {deleted} order detail(s) for the current user."}
+
+
+
 # Delete an order detail
 @router.delete("/{order_detail_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_order_detail(

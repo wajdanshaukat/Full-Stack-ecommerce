@@ -57,7 +57,6 @@ const CheckoutPage = () => {
     }
   }, [isAuthenticated, user]);
 
-  // 🔄 Save form on change (optional but useful for guest users)
   useEffect(() => {
     if (!isAuthenticated) {
       localStorage.setItem("checkoutForm", JSON.stringify(formData));
@@ -134,9 +133,21 @@ const CheckoutPage = () => {
     }
   };
 
+  const handleOrderSuccess = (orderId) => {
+    clearCart();
+    toast.success("Order placed successfully!");
+    navigate("/thank-you", { state: { orderId } });
+  };
+
+
   const handlePlaceOrder = async () => {
     if (!isAuthenticated) {
       toast.error("You need to login first.");
+      return;
+    }
+
+    if (cartItems.length === 0) {
+      toast.error("Your cart is empty. Please add products before placing an order.");
       return;
     }
 
@@ -145,15 +156,15 @@ const CheckoutPage = () => {
 
     // Map your frontend shippingMethod values to backend enum:
     const shippingMethodMap = {
-      "Flat rate": "Standard", // map your "Flat rate" to "Standard"
+      "Flat rate": "Standard",
       "Local pickup": "Pickup",
     };
 
     // Make sure your paymentStatus enum is respected, default to pending
-    const paymentStatus = "Pending"; // or dynamically set if you implement payment flow
+    const paymentStatus = "Pending";
 
     const payload = {
-      user_id: user?.id, // assuming your user context has id
+      user_id: user?.id,
       billing_first_name: billing.firstName,
       billing_last_name: billing.lastName,
       billing_email: billing.email,
@@ -190,26 +201,25 @@ const CheckoutPage = () => {
         quantity: item.quantity,
       }))
     };
-    console.log("Cart Items:", cartItems);
     console.log("Mapped Order Details:", payload);
       
 
     try {
-      await axios.post("http://localhost:8000/orders/", payload, {
+      const response = await axios.post("http://localhost:8000/orders/", payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
-      clearCart();
-      toast.success("Order placed successfully!");
-      navigate("/thank-you");
+      const orderId = response.data.id;
+      handleOrderSuccess(orderId);
     } catch (error) {
       console.error("Order failed:", error.response?.data || error.message);
       toast.error("Failed to place order.");
     }
   };
 
+  
   return (
     <div className="bg-white">
       <Toaster position="top-right" />

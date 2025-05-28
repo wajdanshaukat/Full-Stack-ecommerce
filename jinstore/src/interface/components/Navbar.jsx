@@ -11,16 +11,14 @@ import { useWishlist } from "../../context/WishlistContext";
 import CartDropdown from "./CartDropdown";
 import { useNavigate } from "react-router-dom";
 
-
 const Navbar = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuthenticated, logout } = useAuth();
-  const { getCartCount } = useCart();
-  const { wishlist } = useWishlist();
+  const { isAuthenticated, logout, user } = useAuth();
+  const { clearCart, getCartCount } = useCart();
+  const { wishlist, clearWishlist } = useWishlist();
   const [activeLink, setActiveLink] = useState("Home");
   const navigate = useNavigate();
-
 
   const cartRef = useRef(null);
   const cartButtonRef = useRef(null);
@@ -46,6 +44,13 @@ const Navbar = () => {
   const handleLinkClick = (link) => {
     setActiveLink(link);
     setMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    clearCart();
+    clearWishlist();
+    navigate(0);
   };
 
   return (
@@ -105,16 +110,17 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-4 text-sm text-gray-700 relative z-50">
           {isAuthenticated ? (
             <>
-              <span className="flex items-center gap-2 hover:text-blue-600 cursor-pointer">
+              <Link
+                to="/dashboard"
+                className="flex items-center gap-2 hover:text-blue-600"
+              >
                 <FaUser className="text-xl" />
-                Hello, User
-              </span>
+                {`Hello, ${user?.first_name || "User"}`}
+              </Link>
+
               <button
                 className="flex items-center gap-2 hover:text-red-500 cursor-pointer"
-                onClick={() => {
-                  logout();
-                  navigate(0);
-                }}
+                onClick={handleLogout}
               >
                 Logout
               </button>

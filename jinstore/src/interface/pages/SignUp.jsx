@@ -27,11 +27,16 @@ const SignUp = () => {
       );
 
       const token = loginRes.data.access_token;
-      await login(token); // fetch profile
 
-      toast.success("Registration successful! Welcome!");
+      const profileRes = await axios.get("http://localhost:8000/protected/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      // Redirect to CompleteProfilePage after signup
+      const userData = profileRes.data;
+      await login(userData, token);
+
+      toast.success("Registration successful! Please complete your profile.");
+
       navigate("/complete-profile");
     } catch (error) {
       console.error("Sign-up failed:", error.response?.data || error.message);
@@ -43,13 +48,13 @@ const SignUp = () => {
     <div className="flex justify-center items-center">
       <div className="w-full max-w-md p-8">
         <p className="text-sm text-center text-gray-500 mb-4">
-          There are many advantages to creating an account: the payment process
-          is faster, shipment tracking is possible, and much more.
+          There are many advantages to creating an account: the payment process is faster,
+          shipment tracking is possible, and much more.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1">
-            <label className="block text-sm text-gray-700 font-medium">
+            <label className="block text-sm font-medium text-gray-700">
               Email address <span className="text-red-500">*</span>
             </label>
             <input
@@ -62,7 +67,7 @@ const SignUp = () => {
           </div>
 
           <div className="space-y-1">
-            <label className="block text-sm text-gray-700 font-medium">
+            <label className="block text-sm font-medium text-gray-700">
               Password <span className="text-red-500">*</span>
             </label>
             <input
@@ -104,15 +109,12 @@ const SignUp = () => {
             Your personal data will be used to support your experience throughout
             this website, to manage access to your account, and for other purposes
             described in our{" "}
-            <a href="#" className="text-purple-600 hover:underline">
-              privacy policy
-            </a>
-            .
+            <a href="#" className="text-purple-600 hover:underline">privacy policy</a>.
           </p>
 
           <button
             type="submit"
-            className="w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-800 transition"
+            className="w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-800 transition cursor-pointer"
           >
             Register
           </button>

@@ -173,8 +173,10 @@ const OrderSummary = ({
 
       <button
         onClick={handlePlaceOrder}
-        className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm py-3 rounded-md transition-all cursor-pointer duration-200"
-      >
+        disabled={cartItems.length === 0}
+        className={`w-full bg-black text-white py-3 rounded ${
+          cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-800 cursor-pointer'
+        }`}      >
         Place order
       </button>
     </div>

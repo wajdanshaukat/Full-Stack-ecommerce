@@ -12,7 +12,9 @@ os.makedirs("static/uploads", exist_ok=True)
 
 # Create all tables on startup
 Base.metadata.create_all(bind=engine)
-app = FastAPI()
+app = FastAPI(
+    title= "JinStore Backend",
+)
 
 # Mount static directory to serve uploaded images
 static_path = os.path.join(os.path.dirname(__file__), "static")

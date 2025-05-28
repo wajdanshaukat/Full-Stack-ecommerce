@@ -1,0 +1,1473 @@
+Brands:
+[
+  {
+    "name": "FreshHarvest",
+    "description": "Farm-fresh produce, hand-picked for the best quality.",
+    "id": 1
+  },
+  {
+    "name": "BakeMaster",
+    "description": "Freshly baked bread and pastries made with the finest ingredients.",
+    "id": 2
+  },
+  {
+    "name": "SipJoy",
+    "description": "Refreshing beverages, from juices to sparkling sodas.",
+    "id": 3
+  },
+  {
+    "name": "MamaBabyCare",
+    "description": "Quality products for moms and babies, ensuring health and comfort.",
+    "id": 4
+  },
+  {
+    "name": "SnackTime Delights",
+    "description": "Delicious biscuits and snacks for every craving.",
+    "id": 5
+  },
+  {
+    "name": "Morning Meadow",
+    "description": "Wholesome breakfast options and dairy products for a nutritious start.",
+    "id": 6
+  },
+  {
+    "name": "PantryFresh",
+    "description": "Essential groceries and pantry staples, fresh and affordable.",
+    "id": 7
+  },
+  {
+    "name": "ChillBite",
+    "description": "Convenient and tasty frozen foods for every meal.",
+    "id": 8
+  },
+  {
+    "name": "Ocean & Farm",
+    "description": "Premium meats and seafood, sourced for the best quality.",
+    "id": 9
+  }
+]
+
+
+
+Categories:
+[
+  {
+    "name": "Fruits & Vegetables",
+    "description": "Fresh fruits and vegetables sourced locally and internationally.",
+    "parent_id": 0,
+    "id": 1,
+    "image_path": "http://localhost:8000/static/images/categories/fruits.png",
+    "subcategories": []
+  },
+  {
+    "name": "Breads & Bakery",
+    "description": "Freshly baked breads, cakes, pastries, and other bakery essentials",
+    "parent_id": 0,
+    "id": 2,
+    "image_path": "http://localhost:8000/static/images/categories/breads.png",
+    "subcategories": []
+  },
+  {
+    "name": "Beverages",
+    "description": "Refreshing drinks including juices, soft drinks, tea, coffee, and more.",
+    "parent_id": 0,
+    "id": 3,
+    "image_path": "http://localhost:8000/static/images/categories/beverages.png",
+    "subcategories": []
+  },
+  {
+    "name": "Baby & Pregnancy",
+    "description": "Products for baby care and maternity including diapers, baby food, etc.",
+    "parent_id": 0,
+    "id": 4,
+    "image_path": "http://localhost:8000/static/images/categories/baby.png",
+    "subcategories": []
+  },
+  {
+    "name": "Biscuits & Snacks",
+    "description": "Tasty biscuits, chips, namkeen, and other ready-to-eat snack items.",
+    "parent_id": 0,
+    "id": 5,
+    "image_path": "http://localhost:8000/static/images/categories/biscuts.png",
+    "subcategories": []
+  },
+  {
+    "name": "Breakfast & Dairy",
+    "description": "Breakfast cereals, milk, butter, cheese, and other dairy essentials.",
+    "parent_id": 0,
+    "id": 6,
+    "image_path": "http://localhost:8000/static/images/categories/beakfast.png",
+    "subcategories": []
+  },
+  {
+    "name": "Grocery & Staples",
+    "description": "Daily grocery items like rice, wheat, oils, lentils, and other essentials",
+    "parent_id": 0,
+    "id": 7,
+    "image_path": "http://localhost:8000/static/images/categories/grocery.png",
+    "subcategories": []
+  },
+  {
+    "name": "Frozen Food",
+    "description": "Ready-to-cook frozen items like parathas, nuggets, frozen vegetables, etc",
+    "parent_id": 0,
+    "id": 8,
+    "image_path": "http://localhost:8000/static/images/categories/frozen_foods.png",
+    "subcategories": []
+  },
+  {
+    "name": "Meats & Seafood",
+    "description": "All kind of meat and seafood are available here.",
+    "parent_id": 0,
+    "id": 9,
+    "image_path": "http://localhost:8000/static/images/categories/Meats.png",
+    "subcategories": []
+  }
+]
+
+
+Products:
+[
+  {
+    "id": 1,
+    "name": "Fresh Bananas",
+    "description": "Organic ripe bananas full of nutrition",
+    "sku": "FV001",
+    "category_id": 1,
+    "brand_id": 1,
+    "unit_price": 10.17,
+    "is_active": true,
+    "category": {
+      "name": "Fruits & Vegetables",
+      "description": "Fresh fruits and vegetables sourced locally and internationally.",
+      "parent_id": 0,
+      "id": 1,
+      "image_path": "http://localhost:8000/static/images/categories/fruits.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "FreshHarvest",
+      "description": "Farm-fresh produce, hand-picked for the best quality.",
+      "id": 1
+    },
+    "images": [
+      {
+        "id": 1,
+        "image_path": "http://localhost:8000/static/images/products/fruit_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Red Apples",
+    "description": "Crisp and sweet Washington apples",
+    "sku": "FV002",
+    "category_id": 1,
+    "brand_id": 1,
+    "unit_price": 15.52,
+    "is_active": true,
+    "category": {
+      "name": "Fruits & Vegetables",
+      "description": "Fresh fruits and vegetables sourced locally and internationally.",
+      "parent_id": 0,
+      "id": 1,
+      "image_path": "http://localhost:8000/static/images/categories/fruits.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "FreshHarvest",
+      "description": "Farm-fresh produce, hand-picked for the best quality.",
+      "id": 1
+    },
+    "images": [
+      {
+        "id": 2,
+        "image_path": "http://localhost:8000/static/images/products/fruit_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Spinach Bunch",
+    "description": "Fresh green spinach leaves",
+    "sku": "FV003",
+    "category_id": 1,
+    "brand_id": 1,
+    "unit_price": 17.37,
+    "is_active": true,
+    "category": {
+      "name": "Fruits & Vegetables",
+      "description": "Fresh fruits and vegetables sourced locally and internationally.",
+      "parent_id": 0,
+      "id": 1,
+      "image_path": "http://localhost:8000/static/images/categories/fruits.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "FreshHarvest",
+      "description": "Farm-fresh produce, hand-picked for the best quality.",
+      "id": 1
+    },
+    "images": [
+      {
+        "id": 3,
+        "image_path": "http://localhost:8000/static/images/products/fruit_4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Tomatoes",
+    "description": "Juicy and ripe tomatoes",
+    "sku": "FV004",
+    "category_id": 1,
+    "brand_id": 1,
+    "unit_price": 23.37,
+    "is_active": true,
+    "category": {
+      "name": "Fruits & Vegetables",
+      "description": "Fresh fruits and vegetables sourced locally and internationally.",
+      "parent_id": 0,
+      "id": 1,
+      "image_path": "http://localhost:8000/static/images/categories/fruits.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "FreshHarvest",
+      "description": "Farm-fresh produce, hand-picked for the best quality.",
+      "id": 1
+    },
+    "images": [
+      {
+        "id": 4,
+        "image_path": "http://localhost:8000/static/images/products/fruit_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Carrots",
+    "description": "Crunchy and sweet carrots",
+    "sku": "FV005",
+    "category_id": 1,
+    "brand_id": 1,
+    "unit_price": 21.22,
+    "is_active": true,
+    "category": {
+      "name": "Fruits & Vegetables",
+      "description": "Fresh fruits and vegetables sourced locally and internationally.",
+      "parent_id": 0,
+      "id": 1,
+      "image_path": "http://localhost:8000/static/images/categories/fruits.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "FreshHarvest",
+      "description": "Farm-fresh produce, hand-picked for the best quality.",
+      "id": 1
+    },
+    "images": [
+      {
+        "id": 5,
+        "image_path": "http://localhost:8000/static/images/products/fruit_5.jpg"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Whole Wheat Bread",
+    "description": "Soft and fresh whole grain bread",
+    "sku": "BB001",
+    "category_id": 2,
+    "brand_id": 2,
+    "unit_price": 3.96,
+    "is_active": true,
+    "category": {
+      "name": "Breads & Bakery",
+      "description": "Freshly baked breads, cakes, pastries, and other bakery essentials",
+      "parent_id": 0,
+      "id": 2,
+      "image_path": "http://localhost:8000/static/images/categories/breads.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "BakeMaster",
+      "description": "Freshly baked bread and pastries made with the finest ingredients.",
+      "id": 2
+    },
+    "images": [
+      {
+        "id": 6,
+        "image_path": "http://localhost:8000/static/images/products/bread_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Croissant",
+    "description": "Buttery and flaky French croissant",
+    "sku": "BB002",
+    "category_id": 2,
+    "brand_id": 2,
+    "unit_price": 19.66,
+    "is_active": true,
+    "category": {
+      "name": "Breads & Bakery",
+      "description": "Freshly baked breads, cakes, pastries, and other bakery essentials",
+      "parent_id": 0,
+      "id": 2,
+      "image_path": "http://localhost:8000/static/images/categories/breads.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "BakeMaster",
+      "description": "Freshly baked bread and pastries made with the finest ingredients.",
+      "id": 2
+    },
+    "images": [
+      {
+        "id": 7,
+        "image_path": "http://localhost:8000/static/images/products/bread_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Multigrain Loaf",
+    "description": "Healthy multigrain loaf for daily use",
+    "sku": "BB003",
+    "category_id": 2,
+    "brand_id": 2,
+    "unit_price": 12.13,
+    "is_active": true,
+    "category": {
+      "name": "Breads & Bakery",
+      "description": "Freshly baked breads, cakes, pastries, and other bakery essentials",
+      "parent_id": 0,
+      "id": 2,
+      "image_path": "http://localhost:8000/static/images/categories/breads.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "BakeMaster",
+      "description": "Freshly baked bread and pastries made with the finest ingredients.",
+      "id": 2
+    },
+    "images": [
+      {
+        "id": 8,
+        "image_path": "http://localhost:8000/static/images/products/bread_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Garlic Bread",
+    "description": "Tasty garlic bread with herbs",
+    "sku": "BB004",
+    "category_id": 2,
+    "brand_id": 2,
+    "unit_price": 21.76,
+    "is_active": true,
+    "category": {
+      "name": "Breads & Bakery",
+      "description": "Freshly baked breads, cakes, pastries, and other bakery essentials",
+      "parent_id": 0,
+      "id": 2,
+      "image_path": "http://localhost:8000/static/images/categories/breads.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "BakeMaster",
+      "description": "Freshly baked bread and pastries made with the finest ingredients.",
+      "id": 2
+    },
+    "images": [
+      {
+        "id": 9,
+        "image_path": "http://localhost:8000/static/images/products/bread_4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Buns",
+    "description": "Soft burger buns for snacks",
+    "sku": "BB005",
+    "category_id": 2,
+    "brand_id": 2,
+    "unit_price": 6.11,
+    "is_active": true,
+    "category": {
+      "name": "Breads & Bakery",
+      "description": "Freshly baked breads, cakes, pastries, and other bakery essentials",
+      "parent_id": 0,
+      "id": 2,
+      "image_path": "http://localhost:8000/static/images/categories/breads.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "BakeMaster",
+      "description": "Freshly baked bread and pastries made with the finest ingredients.",
+      "id": 2
+    },
+    "images": [
+      {
+        "id": 10,
+        "image_path": "http://localhost:8000/static/images/products/bread_5.jpg"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Orange Juice",
+    "description": "Freshly squeezed orange juice",
+    "sku": "B001",
+    "category_id": 3,
+    "brand_id": 3,
+    "unit_price": 10.29,
+    "is_active": true,
+    "category": {
+      "name": "Beverages",
+      "description": "Refreshing drinks including juices, soft drinks, tea, coffee, and more.",
+      "parent_id": 0,
+      "id": 3,
+      "image_path": "http://localhost:8000/static/images/categories/beverages.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SipJoy",
+      "description": "Refreshing beverages, from juices to sparkling sodas.",
+      "id": 3
+    },
+    "images": [
+      {
+        "id": 11,
+        "image_path": "http://localhost:8000/static/images/products/beverages_5.jpg"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Green Tea",
+    "description": "Healthy and refreshing green tea",
+    "sku": "B002",
+    "category_id": 3,
+    "brand_id": 3,
+    "unit_price": 7.45,
+    "is_active": true,
+    "category": {
+      "name": "Beverages",
+      "description": "Refreshing drinks including juices, soft drinks, tea, coffee, and more.",
+      "parent_id": 0,
+      "id": 3,
+      "image_path": "http://localhost:8000/static/images/categories/beverages.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SipJoy",
+      "description": "Refreshing beverages, from juices to sparkling sodas.",
+      "id": 3
+    },
+    "images": [
+      {
+        "id": 12,
+        "image_path": "http://localhost:8000/static/images/products/beverages_4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Cola Drink",
+    "description": "Carbonated soft drink with cola flavor",
+    "sku": "B003",
+    "category_id": 3,
+    "brand_id": 3,
+    "unit_price": 16.81,
+    "is_active": true,
+    "category": {
+      "name": "Beverages",
+      "description": "Refreshing drinks including juices, soft drinks, tea, coffee, and more.",
+      "parent_id": 0,
+      "id": 3,
+      "image_path": "http://localhost:8000/static/images/categories/beverages.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SipJoy",
+      "description": "Refreshing beverages, from juices to sparkling sodas.",
+      "id": 3
+    },
+    "images": [
+      {
+        "id": 13,
+        "image_path": "http://localhost:8000/static/images/products/beverages_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Mineral Water",
+    "description": "Pure natural spring mineral water",
+    "sku": "B004",
+    "category_id": 3,
+    "brand_id": 3,
+    "unit_price": 10.48,
+    "is_active": true,
+    "category": {
+      "name": "Beverages",
+      "description": "Refreshing drinks including juices, soft drinks, tea, coffee, and more.",
+      "parent_id": 0,
+      "id": 3,
+      "image_path": "http://localhost:8000/static/images/categories/beverages.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SipJoy",
+      "description": "Refreshing beverages, from juices to sparkling sodas.",
+      "id": 3
+    },
+    "images": [
+      {
+        "id": 14,
+        "image_path": "http://localhost:8000/static/images/products/beverages_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Milkshake",
+    "description": "Creamy and delicious milkshake",
+    "sku": "B005",
+    "category_id": 3,
+    "brand_id": 3,
+    "unit_price": 18,
+    "is_active": true,
+    "category": {
+      "name": "Beverages",
+      "description": "Refreshing drinks including juices, soft drinks, tea, coffee, and more.",
+      "parent_id": 0,
+      "id": 3,
+      "image_path": "http://localhost:8000/static/images/categories/beverages.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SipJoy",
+      "description": "Refreshing beverages, from juices to sparkling sodas.",
+      "id": 3
+    },
+    "images": [
+      {
+        "id": 15,
+        "image_path": "http://localhost:8000/static/images/products/beverages_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Baby Diapers",
+    "description": "Soft and absorbent baby diapers",
+    "sku": "BP001",
+    "category_id": 4,
+    "brand_id": 4,
+    "unit_price": 15.74,
+    "is_active": true,
+    "category": {
+      "name": "Baby & Pregnancy",
+      "description": "Products for baby care and maternity including diapers, baby food, etc.",
+      "parent_id": 0,
+      "id": 4,
+      "image_path": "http://localhost:8000/static/images/categories/baby.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "MamaBabyCare",
+      "description": "Quality products for moms and babies, ensuring health and comfort.",
+      "id": 4
+    },
+    "images": [
+      {
+        "id": 16,
+        "image_path": "http://localhost:8000/static/images/products/baby_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Baby Lotion",
+    "description": "Gentle moisturizing lotion for babies",
+    "sku": "BP002",
+    "category_id": 4,
+    "brand_id": 4,
+    "unit_price": 17.09,
+    "is_active": true,
+    "category": {
+      "name": "Baby & Pregnancy",
+      "description": "Products for baby care and maternity including diapers, baby food, etc.",
+      "parent_id": 0,
+      "id": 4,
+      "image_path": "http://localhost:8000/static/images/categories/baby.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "MamaBabyCare",
+      "description": "Quality products for moms and babies, ensuring health and comfort.",
+      "id": 4
+    },
+    "images": [
+      {
+        "id": 17,
+        "image_path": "http://localhost:8000/static/images/products/baby_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Infant Formula",
+    "description": "Nutritional milk formula for infants",
+    "sku": "BP003",
+    "category_id": 4,
+    "brand_id": 4,
+    "unit_price": 23.33,
+    "is_active": true,
+    "category": {
+      "name": "Baby & Pregnancy",
+      "description": "Products for baby care and maternity including diapers, baby food, etc.",
+      "parent_id": 0,
+      "id": 4,
+      "image_path": "http://localhost:8000/static/images/categories/baby.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "MamaBabyCare",
+      "description": "Quality products for moms and babies, ensuring health and comfort.",
+      "id": 4
+    },
+    "images": [
+      {
+        "id": 18,
+        "image_path": "http://localhost:8000/static/images/products/baby_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Maternity Vitamins",
+    "description": "Vitamins to support pregnancy",
+    "sku": "BP004",
+    "category_id": 4,
+    "brand_id": 4,
+    "unit_price": 5.14,
+    "is_active": true,
+    "category": {
+      "name": "Baby & Pregnancy",
+      "description": "Products for baby care and maternity including diapers, baby food, etc.",
+      "parent_id": 0,
+      "id": 4,
+      "image_path": "http://localhost:8000/static/images/categories/baby.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "MamaBabyCare",
+      "description": "Quality products for moms and babies, ensuring health and comfort.",
+      "id": 4
+    },
+    "images": [
+      {
+        "id": 19,
+        "image_path": "http://localhost:8000/static/images/products/baby_4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Baby Shampoo",
+    "description": "Tear-free baby shampoo",
+    "sku": "BP005",
+    "category_id": 4,
+    "brand_id": 4,
+    "unit_price": 8.49,
+    "is_active": true,
+    "category": {
+      "name": "Baby & Pregnancy",
+      "description": "Products for baby care and maternity including diapers, baby food, etc.",
+      "parent_id": 0,
+      "id": 4,
+      "image_path": "http://localhost:8000/static/images/categories/baby.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "MamaBabyCare",
+      "description": "Quality products for moms and babies, ensuring health and comfort.",
+      "id": 4
+    },
+    "images": [
+      {
+        "id": 20,
+        "image_path": "http://localhost:8000/static/images/products/baby_5.jpg"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Chocolate Cookies",
+    "description": "Delicious cookies with choco chips",
+    "sku": "BS001",
+    "category_id": 5,
+    "brand_id": 5,
+    "unit_price": 13.54,
+    "is_active": true,
+    "category": {
+      "name": "Biscuits & Snacks",
+      "description": "Tasty biscuits, chips, namkeen, and other ready-to-eat snack items.",
+      "parent_id": 0,
+      "id": 5,
+      "image_path": "http://localhost:8000/static/images/categories/biscuts.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SnackTime Delights",
+      "description": "Delicious biscuits and snacks for every craving.",
+      "id": 5
+    },
+    "images": [
+      {
+        "id": 21,
+        "image_path": "http://localhost:8000/static/images/products/biscuits_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Salted Crackers",
+    "description": "Crispy and lightly salted crackers",
+    "sku": "BS002",
+    "category_id": 5,
+    "brand_id": 5,
+    "unit_price": 14.72,
+    "is_active": true,
+    "category": {
+      "name": "Biscuits & Snacks",
+      "description": "Tasty biscuits, chips, namkeen, and other ready-to-eat snack items.",
+      "parent_id": 0,
+      "id": 5,
+      "image_path": "http://localhost:8000/static/images/categories/biscuts.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SnackTime Delights",
+      "description": "Delicious biscuits and snacks for every craving.",
+      "id": 5
+    },
+    "images": [
+      {
+        "id": 22,
+        "image_path": "http://localhost:8000/static/images/products/biscuits_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Potato Chips",
+    "description": "Classic salted potato chips",
+    "sku": "BS003",
+    "category_id": 5,
+    "brand_id": 5,
+    "unit_price": 21.5,
+    "is_active": true,
+    "category": {
+      "name": "Biscuits & Snacks",
+      "description": "Tasty biscuits, chips, namkeen, and other ready-to-eat snack items.",
+      "parent_id": 0,
+      "id": 5,
+      "image_path": "http://localhost:8000/static/images/categories/biscuts.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SnackTime Delights",
+      "description": "Delicious biscuits and snacks for every craving.",
+      "id": 5
+    },
+    "images": [
+      {
+        "id": 23,
+        "image_path": "http://localhost:8000/static/images/products/biscuits_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Granola Bars",
+    "description": "Healthy bars with nuts and oats",
+    "sku": "BS004",
+    "category_id": 5,
+    "brand_id": 5,
+    "unit_price": 8.85,
+    "is_active": true,
+    "category": {
+      "name": "Biscuits & Snacks",
+      "description": "Tasty biscuits, chips, namkeen, and other ready-to-eat snack items.",
+      "parent_id": 0,
+      "id": 5,
+      "image_path": "http://localhost:8000/static/images/categories/biscuts.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SnackTime Delights",
+      "description": "Delicious biscuits and snacks for every craving.",
+      "id": 5
+    },
+    "images": [
+      {
+        "id": 24,
+        "image_path": "http://localhost:8000/static/images/products/biscuits_4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Nachos",
+    "description": "Crunchy corn nachos with flavor",
+    "sku": "BS005",
+    "category_id": 5,
+    "brand_id": 5,
+    "unit_price": 10.89,
+    "is_active": true,
+    "category": {
+      "name": "Biscuits & Snacks",
+      "description": "Tasty biscuits, chips, namkeen, and other ready-to-eat snack items.",
+      "parent_id": 0,
+      "id": 5,
+      "image_path": "http://localhost:8000/static/images/categories/biscuts.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "SnackTime Delights",
+      "description": "Delicious biscuits and snacks for every craving.",
+      "id": 5
+    },
+    "images": [
+      {
+        "id": 25,
+        "image_path": "http://localhost:8000/static/images/products/biscuits_5.jpg"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Greek Yogurt",
+    "description": "Creamy yogurt with probiotics",
+    "sku": "BD001",
+    "category_id": 6,
+    "brand_id": 6,
+    "unit_price": 22.02,
+    "is_active": true,
+    "category": {
+      "name": "Breakfast & Dairy",
+      "description": "Breakfast cereals, milk, butter, cheese, and other dairy essentials.",
+      "parent_id": 0,
+      "id": 6,
+      "image_path": "http://localhost:8000/static/images/categories/beakfast.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Morning Meadow",
+      "description": "Wholesome breakfast options and dairy products for a nutritious start.",
+      "id": 6
+    },
+    "images": [
+      {
+        "id": 26,
+        "image_path": "http://localhost:8000/static/images/products/breakfast_5.jpg"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Butter",
+    "description": "Creamy and salted butter",
+    "sku": "BD002",
+    "category_id": 6,
+    "brand_id": 6,
+    "unit_price": 2.08,
+    "is_active": true,
+    "category": {
+      "name": "Breakfast & Dairy",
+      "description": "Breakfast cereals, milk, butter, cheese, and other dairy essentials.",
+      "parent_id": 0,
+      "id": 6,
+      "image_path": "http://localhost:8000/static/images/categories/beakfast.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Morning Meadow",
+      "description": "Wholesome breakfast options and dairy products for a nutritious start.",
+      "id": 6
+    },
+    "images": [
+      {
+        "id": 27,
+        "image_path": "http://localhost:8000/static/images/products/breakfast_4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Cheddar Cheese",
+    "description": "Matured cheddar cheese block",
+    "sku": "BD003",
+    "category_id": 6,
+    "brand_id": 6,
+    "unit_price": 4.38,
+    "is_active": true,
+    "category": {
+      "name": "Breakfast & Dairy",
+      "description": "Breakfast cereals, milk, butter, cheese, and other dairy essentials.",
+      "parent_id": 0,
+      "id": 6,
+      "image_path": "http://localhost:8000/static/images/categories/beakfast.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Morning Meadow",
+      "description": "Wholesome breakfast options and dairy products for a nutritious start.",
+      "id": 6
+    },
+    "images": [
+      {
+        "id": 28,
+        "image_path": "http://localhost:8000/static/images/products/breakfast_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Eggs Pack",
+    "description": "Farm fresh eggs, pack of 12",
+    "sku": "BD004",
+    "category_id": 6,
+    "brand_id": 6,
+    "unit_price": 16.13,
+    "is_active": true,
+    "category": {
+      "name": "Breakfast & Dairy",
+      "description": "Breakfast cereals, milk, butter, cheese, and other dairy essentials.",
+      "parent_id": 0,
+      "id": 6,
+      "image_path": "http://localhost:8000/static/images/categories/beakfast.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Morning Meadow",
+      "description": "Wholesome breakfast options and dairy products for a nutritious start.",
+      "id": 6
+    },
+    "images": [
+      {
+        "id": 29,
+        "image_path": "http://localhost:8000/static/images/products/breakfast_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Oatmeal",
+    "description": "Whole grain oats for breakfast",
+    "sku": "BD005",
+    "category_id": 6,
+    "brand_id": 6,
+    "unit_price": 4.84,
+    "is_active": true,
+    "category": {
+      "name": "Breakfast & Dairy",
+      "description": "Breakfast cereals, milk, butter, cheese, and other dairy essentials.",
+      "parent_id": 0,
+      "id": 6,
+      "image_path": "http://localhost:8000/static/images/categories/beakfast.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Morning Meadow",
+      "description": "Wholesome breakfast options and dairy products for a nutritious start.",
+      "id": 6
+    },
+    "images": [
+      {
+        "id": 30,
+        "image_path": "http://localhost:8000/static/images/products/breakfast_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Basmati Rice",
+    "description": "Long grain aromatic rice",
+    "sku": "GS001",
+    "category_id": 7,
+    "brand_id": 7,
+    "unit_price": 4.84,
+    "is_active": true,
+    "category": {
+      "name": "Grocery & Staples",
+      "description": "Daily grocery items like rice, wheat, oils, lentils, and other essentials",
+      "parent_id": 0,
+      "id": 7,
+      "image_path": "http://localhost:8000/static/images/categories/grocery.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "PantryFresh",
+      "description": "Essential groceries and pantry staples, fresh and affordable.",
+      "id": 7
+    },
+    "images": [
+      {
+        "id": 31,
+        "image_path": "http://localhost:8000/static/images/products/grocery_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Wheat Flour",
+    "description": "Finely milled whole wheat flour",
+    "sku": "GS002",
+    "category_id": 7,
+    "brand_id": 7,
+    "unit_price": 4.38,
+    "is_active": true,
+    "category": {
+      "name": "Grocery & Staples",
+      "description": "Daily grocery items like rice, wheat, oils, lentils, and other essentials",
+      "parent_id": 0,
+      "id": 7,
+      "image_path": "http://localhost:8000/static/images/categories/grocery.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "PantryFresh",
+      "description": "Essential groceries and pantry staples, fresh and affordable.",
+      "id": 7
+    },
+    "images": [
+      {
+        "id": 32,
+        "image_path": "http://localhost:8000/static/images/products/grocery_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Sugar",
+    "description": "Refined white sugar",
+    "sku": "GS003",
+    "category_id": 7,
+    "brand_id": 7,
+    "unit_price": 24.63,
+    "is_active": true,
+    "category": {
+      "name": "Grocery & Staples",
+      "description": "Daily grocery items like rice, wheat, oils, lentils, and other essentials",
+      "parent_id": 0,
+      "id": 7,
+      "image_path": "http://localhost:8000/static/images/categories/grocery.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "PantryFresh",
+      "description": "Essential groceries and pantry staples, fresh and affordable.",
+      "id": 7
+    },
+    "images": [
+      {
+        "id": 33,
+        "image_path": "http://localhost:8000/static/images/products/grocery_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Cooking Oil",
+    "description": "Sunflower oil for cooking",
+    "sku": "GS004",
+    "category_id": 7,
+    "brand_id": 7,
+    "unit_price": 10.2,
+    "is_active": true,
+    "category": {
+      "name": "Grocery & Staples",
+      "description": "Daily grocery items like rice, wheat, oils, lentils, and other essentials",
+      "parent_id": 0,
+      "id": 7,
+      "image_path": "http://localhost:8000/static/images/categories/grocery.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "PantryFresh",
+      "description": "Essential groceries and pantry staples, fresh and affordable.",
+      "id": 7
+    },
+    "images": [
+      {
+        "id": 34,
+        "image_path": "http://localhost:8000/static/images/products/grocery_4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Salt",
+    "description": "Iodized table salt",
+    "sku": "GS005",
+    "category_id": 7,
+    "brand_id": 7,
+    "unit_price": 7.3,
+    "is_active": true,
+    "category": {
+      "name": "Grocery & Staples",
+      "description": "Daily grocery items like rice, wheat, oils, lentils, and other essentials",
+      "parent_id": 0,
+      "id": 7,
+      "image_path": "http://localhost:8000/static/images/categories/grocery.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "PantryFresh",
+      "description": "Essential groceries and pantry staples, fresh and affordable.",
+      "id": 7
+    },
+    "images": [
+      {
+        "id": 35,
+        "image_path": "http://localhost:8000/static/images/products/grocery_7.jpg"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Frozen Peas",
+    "description": "Green peas frozen to retain freshness",
+    "sku": "FF001",
+    "category_id": 8,
+    "brand_id": 8,
+    "unit_price": 11.29,
+    "is_active": true,
+    "category": {
+      "name": "Frozen Food",
+      "description": "Ready-to-cook frozen items like parathas, nuggets, frozen vegetables, etc",
+      "parent_id": 0,
+      "id": 8,
+      "image_path": "http://localhost:8000/static/images/categories/frozen_foods.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "ChillBite",
+      "description": "Convenient and tasty frozen foods for every meal.",
+      "id": 8
+    },
+    "images": [
+      {
+        "id": 36,
+        "image_path": "http://localhost:8000/static/images/products/frozen_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Frozen Pizza",
+    "description": "Ready-to-bake margherita pizza",
+    "sku": "FF002",
+    "category_id": 8,
+    "brand_id": 8,
+    "unit_price": 21.31,
+    "is_active": true,
+    "category": {
+      "name": "Frozen Food",
+      "description": "Ready-to-cook frozen items like parathas, nuggets, frozen vegetables, etc",
+      "parent_id": 0,
+      "id": 8,
+      "image_path": "http://localhost:8000/static/images/categories/frozen_foods.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "ChillBite",
+      "description": "Convenient and tasty frozen foods for every meal.",
+      "id": 8
+    },
+    "images": [
+      {
+        "id": 37,
+        "image_path": "http://localhost:8000/static/images/products/frozen_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Ice Cream",
+    "description": "Vanilla flavored ice cream",
+    "sku": "FF003",
+    "category_id": 8,
+    "brand_id": 8,
+    "unit_price": 19.47,
+    "is_active": true,
+    "category": {
+      "name": "Frozen Food",
+      "description": "Ready-to-cook frozen items like parathas, nuggets, frozen vegetables, etc",
+      "parent_id": 0,
+      "id": 8,
+      "image_path": "http://localhost:8000/static/images/categories/frozen_foods.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "ChillBite",
+      "description": "Convenient and tasty frozen foods for every meal.",
+      "id": 8
+    },
+    "images": [
+      {
+        "id": 38,
+        "image_path": "http://localhost:8000/static/images/products/frozen_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Veggie Nuggets",
+    "description": "Crispy vegetarian nuggets",
+    "sku": "FF004",
+    "category_id": 8,
+    "brand_id": 8,
+    "unit_price": 11.02,
+    "is_active": true,
+    "category": {
+      "name": "Frozen Food",
+      "description": "Ready-to-cook frozen items like parathas, nuggets, frozen vegetables, etc",
+      "parent_id": 0,
+      "id": 8,
+      "image_path": "http://localhost:8000/static/images/categories/frozen_foods.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "ChillBite",
+      "description": "Convenient and tasty frozen foods for every meal.",
+      "id": 8
+    },
+    "images": [
+      {
+        "id": 39,
+        "image_path": "http://localhost:8000/static/images/products/frozen_5.jpg"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Frozen Corn",
+    "description": "Sweet corn kernels, frozen",
+    "sku": "FF005",
+    "category_id": 8,
+    "brand_id": 8,
+    "unit_price": 20.46,
+    "is_active": true,
+    "category": {
+      "name": "Frozen Food",
+      "description": "Ready-to-cook frozen items like parathas, nuggets, frozen vegetables, etc",
+      "parent_id": 0,
+      "id": 8,
+      "image_path": "http://localhost:8000/static/images/categories/frozen_foods.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "ChillBite",
+      "description": "Convenient and tasty frozen foods for every meal.",
+      "id": 8
+    },
+    "images": [
+      {
+        "id": 40,
+        "image_path": "http://localhost:8000/static/images/products/frozen_4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Chicken Breast",
+    "description": "Boneless chicken breast fillet",
+    "sku": "MS001",
+    "category_id": 9,
+    "brand_id": 9,
+    "unit_price": 24.96,
+    "is_active": true,
+    "category": {
+      "name": "Meats & Seafood",
+      "description": "All kind of meat and seafood are available here.",
+      "parent_id": 0,
+      "id": 9,
+      "image_path": "http://localhost:8000/static/images/categories/Meats.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Ocean & Farm",
+      "description": "Premium meats and seafood, sourced for the best quality.",
+      "id": 9
+    },
+    "images": [
+      {
+        "id": 41,
+        "image_path": "http://localhost:8000/static/images/products/meat_1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Salmon Fillet",
+    "description": "Fresh Atlantic salmon fillet",
+    "sku": "MS002",
+    "category_id": 9,
+    "brand_id": 9,
+    "unit_price": 6.41,
+    "is_active": true,
+    "category": {
+      "name": "Meats & Seafood",
+      "description": "All kind of meat and seafood are available here.",
+      "parent_id": 0,
+      "id": 9,
+      "image_path": "http://localhost:8000/static/images/categories/Meats.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Ocean & Farm",
+      "description": "Premium meats and seafood, sourced for the best quality.",
+      "id": 9
+    },
+    "images": [
+      {
+        "id": 42,
+        "image_path": "http://localhost:8000/static/images/products/meat_2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Prawns",
+    "description": "Freshwater prawns, cleaned",
+    "sku": "MS003",
+    "category_id": 9,
+    "brand_id": 9,
+    "unit_price": 23.53,
+    "is_active": true,
+    "category": {
+      "name": "Meats & Seafood",
+      "description": "All kind of meat and seafood are available here.",
+      "parent_id": 0,
+      "id": 9,
+      "image_path": "http://localhost:8000/static/images/categories/Meats.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Ocean & Farm",
+      "description": "Premium meats and seafood, sourced for the best quality.",
+      "id": 9
+    },
+    "images": [
+      {
+        "id": 43,
+        "image_path": "http://localhost:8000/static/images/products/meat_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Beef Mince",
+    "description": "Lean minced beef",
+    "sku": "MS004",
+    "category_id": 9,
+    "brand_id": 9,
+    "unit_price": 24.8,
+    "is_active": true,
+    "category": {
+      "name": "Meats & Seafood",
+      "description": "All kind of meat and seafood are available here.",
+      "parent_id": 0,
+      "id": 9,
+      "image_path": "http://localhost:8000/static/images/categories/Meats.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Ocean & Farm",
+      "description": "Premium meats and seafood, sourced for the best quality.",
+      "id": 9
+    },
+    "images": [
+      {
+        "id": 44,
+        "image_path": "http://localhost:8000/static/images/products/meat_5.jpg"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Fish Finger",
+    "description": "Breaded fish fingers ready to fry",
+    "sku": "MS006",
+    "category_id": 9,
+    "brand_id": 9,
+    "unit_price": 13.01,
+    "is_active": true,
+    "category": {
+      "name": "Meats & Seafood",
+      "description": "All kind of meat and seafood are available here.",
+      "parent_id": 0,
+      "id": 9,
+      "image_path": "http://localhost:8000/static/images/categories/Meats.png",
+      "subcategories": []
+    },
+    "brand": {
+      "name": "Ocean & Farm",
+      "description": "Premium meats and seafood, sourced for the best quality.",
+      "id": 9
+    },
+    "images": [
+      {
+        "id": 46,
+        "image_path": "http://localhost:8000/static/images/products/meat_6.jpg"
+      }
+    ]
+  }
+]
+
+
+Blogs:
+[
+  {
+    "id": 4,
+    "title": "Order up! How grocers are replicating the restaurant experience",
+    "description": "Elit mattis tincidunt hac netus malesuada lorem sem orci nec rhoncus id ut ullam.",
+    "author_name": "erin",
+    "upload_date": "2025-05-07T07:33:21.742891",
+    "image_path": "http://localhost:8000/static/images/blogs/blog4.jpeg"
+  },
+  {
+    "id": 3,
+    "title": "Consumer want grocer to use AI to help them save money",
+    "description": "Elit mattis tincidunt hac netus malesuada lorem sem orci nec rhoncus id ut ullam.",
+    "author_name": "marcin",
+    "upload_date": "2025-05-07T07:32:51.991785",
+    "image_path": "http://localhost:8000/static/images/blogs/blog3.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "The Friday Checkout: Food insecurity keeps retailers off balance",
+    "description": "Elit mattis tincidunt hac netus malesuada lorem sem orci nec rhoncus id ut ullam.",
+    "author_name": "peter",
+    "upload_date": "2025-05-07T07:32:20.780343",
+    "image_path": "http://localhost:8000/static/images/blogs/blog2.jpeg"
+  },
+  {
+    "id": 1,
+    "title": "How grocers are approaching delivery as the market evolves",
+    "description": "Elit mattis tincidunt hac netus malesuada lorem sem orci nec rhoncus id ut ullam.",
+    "author_name": "diana",
+    "upload_date": "2025-05-07T07:31:12.679132",
+    "image_path": "http://localhost:8000/static/images/blogs/blog1.jpeg"
+  }
+]

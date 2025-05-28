@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import AddressForm from "../components/AddressForm";
-import Breadcrumbs from "../../interface/components/Breadcrumbs";
-import { useAuth } from "../../context/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
+import AddressForm from "../../components/AddressForm";
+import { useAuth } from "../../../context/AuthContext";
 import { toast } from "react-hot-toast";
 
-const CompleteProfilePage = () => {
+const EditProfile = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isEditMode =
+    new URLSearchParams(location.search).get("mode") === "edit";
 
   const [profileData, setProfileData] = useState({
     firstName: "",
@@ -28,11 +30,15 @@ const CompleteProfilePage = () => {
     const localUser = user || JSON.parse(localStorage.getItem("user"));
 
     if (localUser) {
-      if (localUser.first_name && localUser.last_name && localUser.email) {
+      if (
+        localUser.first_name &&
+        localUser.last_name &&
+        localUser.email &&
+        !isEditMode
+      ) {
         const type = localUser.user_type || "customer";
         navigate(type === "vendor" ? "/dashboard" : "/");
       } else {
-        // Prefill form with any existing data
         setProfileData({
           firstName: localUser.first_name || "",
           lastName: localUser.last_name || "",
@@ -80,7 +86,6 @@ const CompleteProfilePage = () => {
 
     toast.success("Profile saved locally!");
 
-    // Redirect based on userType after save
     setTimeout(() => {
       navigate(updatedUser.user_type === "vendor" ? "/dashboard" : "/");
     }, 1000);
@@ -88,10 +93,6 @@ const CompleteProfilePage = () => {
 
   return (
     <div className="p-6">
-      <div className="mb-4 text-sm text-gray-500">
-        <Breadcrumbs />
-      </div>
-
       {/* Main content - Centered */}
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl mb-6 font-semibold">Complete Your Profile</h1>
@@ -114,4 +115,4 @@ const CompleteProfilePage = () => {
   );
 };
 
-export default CompleteProfilePage;
+export default EditProfile;

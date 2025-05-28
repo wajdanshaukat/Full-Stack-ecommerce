@@ -43,6 +43,11 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem("cart");
+  };
+
   const getCartCount = () =>
     cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -54,6 +59,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         updateQuantity,
         getCartCount,
+        clearCart,
       }}
     >
       {children}

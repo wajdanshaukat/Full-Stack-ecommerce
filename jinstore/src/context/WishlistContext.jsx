@@ -1,4 +1,3 @@
-// src/context/WishlistContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
 
 const WishlistContext = createContext();
@@ -23,7 +22,7 @@ export const WishlistProvider = ({ children }) => {
   const addToWishlist = (product) => {
     setWishlist((prevWishlist) => {
       if (prevWishlist.find((item) => item.id === product.id)) {
-        return prevWishlist; // Avoid duplicates
+        return prevWishlist;
       }
       return [...prevWishlist, product];
     });
@@ -33,6 +32,10 @@ export const WishlistProvider = ({ children }) => {
     setWishlist((prevWishlist) =>
       prevWishlist.filter((item) => item.id !== productId)
     );
+  };
+
+  const clearWishlist = () => {
+    setWishlist([]);
   };
 
   const isProductInWishlist = (productId) => {
@@ -46,6 +49,7 @@ export const WishlistProvider = ({ children }) => {
         addToWishlist,
         removeFromWishlist,
         isProductInWishlist,
+        clearWishlist,
       }}
     >
       {children}
