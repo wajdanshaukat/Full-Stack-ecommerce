@@ -82,6 +82,15 @@ const Shop = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [sidebarOpen]);
+  
+
   const toggleGridView = (view) => {
     setGridView(view);
     localStorage.setItem("view", view ? "grid" : "list");
@@ -233,8 +242,8 @@ const Shop = () => {
       </div>
 
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex justify-start">
-          <div className="w-64 bg-white p-4 h-full overflow-y-auto relative">
+        <div className="fixed inset-0 bg-black/10 backdrop-blur-sm z-50 flex justify-end">
+        <div className="w-64 bg-white p-4 h-full overflow-y-auto relative shadow-lg">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-gray-800">
                 Filter Products

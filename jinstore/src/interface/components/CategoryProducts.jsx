@@ -79,16 +79,16 @@ const CategoryProductsSection = () => {
     <section className="px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Title Row */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-8 px-2">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-800">
+            <h2 className="text-xl font-semibold text-gray-900">
             Just For You
             </h2>
             <p className="text-sm text-gray-500">
-              Don’t miss the current offers until the end of March.
+              Don’t miss the current offers.
             </p>
           </div>
-          <button className="text-sm font-medium text-green-600 hover:underline">
+          <button className="text-sm text-gray-700 hover:text-black font-medium flex items-center gap-1">
             View All
           </button>
         </div>

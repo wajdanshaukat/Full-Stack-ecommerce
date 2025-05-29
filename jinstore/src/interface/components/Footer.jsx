@@ -57,7 +57,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Main Links */}
-      <div className="py-10 px-4 md:px-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-sm">
+      <div className="py-10 px-4 md:px-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-sm">
         {/* Help Section */}
         <div>
           <h4 className="font-semibold mb-3">Do You Need Help ?</h4>
@@ -66,14 +66,14 @@ const Footer = () => {
             Pressa fåmoska.
           </p>
           <p className="text-[12px]">Monday–Friday: 6am–6pm</p>
-          <div className="flex items-center gap-2 text-lg font-semibold mb-4">
+          <div className="flex items-center gap-2 text-sm font-semibold mb-3">
             <FaPhoneAlt className="text-gray-700" />
             0800 300-353
           </div>
           <p className="text-[12px]">Need help with your order?</p>
           <div className="flex items-center gap-2 text-sm mb-1">
-            <FaEnvelope className="text-gray-700 text-[18px]" />
-            info@example.com
+            <FaEnvelope className="text-gray-700" />
+            info@mail.com
           </div>
         </div>
 
@@ -127,15 +127,15 @@ const Footer = () => {
           <h4 className="font-semibold mb-3">Download our app</h4>
           <div className="space-y-2">
             {/* Google Play Row */}
-            <div className="flex items-center gap-2">
-              <img src={PlayStore} alt="Google Play" className="w-28" />
-              <p className="text-[11px]">Download App Get 20% Discount</p>
+            <div className="flex items-center gap-2 lg:w-[210px] sm:w-[200px]">
+              <img src={PlayStore} alt="Google Play" className="w-28 lg:w-26 md:w-24" />
+              <p className="text-[11px]">Download App Now!</p>
             </div>
 
             {/* App Store Row */}
-            <div className="flex items-center gap-2">
-              <img src={AppStore} alt="App Store" className="w-28" />
-              <p className="text-[11px]">Download App Get 20% Discount</p>
+            <div className="flex items-center gap-2 lg:w-[210px] md:w-[200px] sm:w-[200px]">
+              <img src={AppStore} alt="App Store" className="w-28 lg:w-26 md:w-24" />
+              <p className="text-[11px]">Download App Now!</p>
             </div>
           </div>
 

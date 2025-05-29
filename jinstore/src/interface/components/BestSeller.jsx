@@ -141,17 +141,16 @@ const BestSellersSection = () => {
     <section className="px-4 bg-white py-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8 px-2">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-800">
+            <h2 className="text-xl font-semibold text-gray-900">
               Best Sellers
             </h2>
             <p className="text-sm text-gray-500">
-              Don’t miss this opportunity at a special discount just for this
-              week.
+              Don’t miss this opportunity.
             </p>
           </div>
-          <button className="text-sm text-blue-600 hover:underline font-medium">
+          <button className="text-sm text-gray-700 hover:text-black font-medium flex items-center gap-1">
             View All
           </button>
         </div>

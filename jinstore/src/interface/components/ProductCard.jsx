@@ -95,10 +95,11 @@ const ProductCard = ({ product }) => {
 
       {/* Add to Cart Button */}
       <button
-        className="mt-2 w-full bg-blue-500 text-white py-1.5 rounded text-sm flex items-center justify-center gap-1 hover:bg-blue-600 transition cursor-pointer"
+        className="mt-2 w-full bg-blue-500 text-white py-1.5 rounded text-sm flex items-center justify-center gap-1 hover:bg-blue-600 transition cursor-pointer
+        text-[12px] sm:text-sm"
         onClick={handleAddToCart}
       >
-        <ShoppingCart size={16} /> Add to cart
+        <ShoppingCart size={14} className="sm:size-4" /> Add to cart
       </button>
     </div>
   );

@@ -14,9 +14,9 @@ const BottomNav = ({ menuOpen, handleLinkClick }) => {
     `hover:text-blue-600 ${isActive ? "text-blue-700 font-semibold underline" : ""}`;
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-4 lg:px-12 py-2 text-sm text-gray-700 mt-2">
+    <nav className="bg-white border-b border-gray-200 px-4 lg:px-4 py-2 text-sm md:text-[12px] text-gray-700 mt-2">
       <div className="hidden md:flex justify-between items-center">
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-6 items-center md:font-[8px]">
           <NavLink to="/" className={getLinkClasses}>
             <div className="flex items-center gap-1 cursor-pointer">
               Home
@@ -64,7 +64,7 @@ const BottomNav = ({ menuOpen, handleLinkClick }) => {
             )}
           </div>
 
-          <button className="flex items-center gap-1 bg-red-100 text-red-600 text-xs px-3 py-1 rounded-full font-semibold hover:bg-red-200 transition-all">
+          <button className="flex items-center gap-1 text-red-600 text-xs px-3 py-1 rounded-full font-semibold hover:bg-red-200 transition-all">
             Almost Finished
             <span className="bg-red-500 text-white text-[10px] px-1 py-[1px] ml-1 rounded">
               SALE

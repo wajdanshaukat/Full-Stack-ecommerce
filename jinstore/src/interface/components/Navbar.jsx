@@ -56,7 +56,7 @@ const Navbar = () => {
   return (
     <header className="w-full font-sans z-50 relative">
       {/* Top Mini Bar */}
-      <div className="border-b border-gray-200 text-xs text-gray-600 px-4 lg:px-12 py-2 flex justify-between">
+      <div className="border-b border-gray-200 text-xs text-gray-600 px-4 lg:px-4 py-2 flex justify-between">
         <div className="hidden md:flex gap-4">
           <Link to="/about">About Us</Link>
           <Link to="/account">My Account</Link>
@@ -80,11 +80,11 @@ const Navbar = () => {
       </div>
 
       {/* Middle Section */}
-      <div className="bg-white px-4 lg:px-12 py-3 flex items-center justify-between relative border-b border-gray-200">
+      <div className="bg-white px-4 lg:px-4 py-3 flex items-center justify-between relative border-b border-gray-200">
         {/* Left */}
         <div className="flex items-center gap-4">
           <Link to="/" onClick={() => handleLinkClick("Home")}>
-            <img src={logo} alt="Logo" className="h-10 w-auto cursor-pointer" />
+            <img src={logo} alt="Logo" className="h-10 w-auto object-contain cursor-pointer" />
           </Link>
           <div className="hidden lg:flex items-center text-sm text-gray-600 hover:text-black cursor-pointer">
             <IoLocationOutline className="mr-1 text-lg" />

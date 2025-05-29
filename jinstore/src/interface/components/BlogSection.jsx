@@ -15,7 +15,7 @@ const BlogSection = () => {
   return (
     <section className="px-4 py-16">
       <div className="w-full max-w-7xl xl:max-w-[1280px] mx-auto">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 px-2">
           <div>
             <h2 className="text-xl font-semibold text-gray-900">Our Blogs</h2>
             <p className="text-sm text-gray-500">
