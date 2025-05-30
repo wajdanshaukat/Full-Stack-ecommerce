@@ -16,7 +16,7 @@ const DashboardLayout = () => {
     logout();
     clearCart();
     clearWishlist();
-    navigate(0);
+    navigate("/login");
   };
 
   const getLinkClass = ({ isActive }) =>

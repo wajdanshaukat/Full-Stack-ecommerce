@@ -50,7 +50,7 @@ const Navbar = () => {
     logout();
     clearCart();
     clearWishlist();
-    navigate(0);
+    navigate("/login");
   };
 
   return (

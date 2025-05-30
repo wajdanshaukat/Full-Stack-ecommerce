@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 const AddressForm = ({
   data,
   handleChange,
+  errors = {},
   isShipping = false,
   disabledEmail = false,
 }) => {
@@ -35,9 +36,13 @@ const AddressForm = ({
     }
   }, [user]);
 
+  const inputClass = (field) =>
+    `mt-1 block w-full border px-4 py-2 rounded-md ${
+      errors[field] ? "border-red-500" : ""
+    }`;
+
   return (
     <>
-      {/* your full form as is, unchanged */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="text-sm font-medium text-gray-700">
@@ -47,9 +52,15 @@ const AddressForm = ({
             type="text"
             name="firstName"
             value={data.firstName}
-            onChange={(e) => handleChange(e, isShipping)}
-            className="mt-1 block w-full border px-4 py-2 rounded-md"
+            onChange={(e) => {
+              const { value } = e.target;
+              if (/^[a-zA-Z\s]*$/.test(value)) handleChange(e, isShipping);
+            }}
+            className={inputClass("firstName")}
           />
+          {errors.firstName && (
+            <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>
+          )}
         </div>
         <div>
           <label className="text-sm font-medium text-gray-700">
@@ -59,9 +70,15 @@ const AddressForm = ({
             type="text"
             name="lastName"
             value={data.lastName}
-            onChange={(e) => handleChange(e, isShipping)}
-            className="mt-1 block w-full border px-4 py-2 rounded-md"
+            onChange={(e) => {
+              const { value } = e.target;
+              if (/^[a-zA-Z\s]*$/.test(value)) handleChange(e, isShipping);
+            }}
+            className={inputClass("lastName")}
           />
+          {errors.lastName && (
+            <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>
+          )}
         </div>
       </div>
 
@@ -74,7 +91,7 @@ const AddressForm = ({
           name="companyName"
           value={data.companyName}
           onChange={(e) => handleChange(e, isShipping)}
-          className="mt-1 block w-full border px-4 py-2 rounded-md"
+          className={inputClass("companyName")}
         />
       </div>
 
@@ -84,7 +101,7 @@ const AddressForm = ({
           name="country"
           value={data.country}
           onChange={(e) => handleChange(e, isShipping)}
-          className="mt-1 block w-full border px-4 py-2 rounded-md"
+          className={inputClass("country")}
         >
           <option>Pakistan</option>
           <option>Turkey</option>
@@ -92,6 +109,9 @@ const AddressForm = ({
           <option>China</option>
           <option>England</option>
         </select>
+        {errors.country && (
+          <p className="text-red-600 text-sm mt-1">{errors.country}</p>
+        )}
       </div>
 
       <div>
@@ -104,15 +124,19 @@ const AddressForm = ({
           value={data.streetAddress}
           onChange={(e) => handleChange(e, isShipping)}
           placeholder="House number and street name"
-          className="mt-1 mb-3 block w-full border px-4 py-2 rounded-md"
+          className={inputClass("streetAddress")}
         />
+        {errors.streetAddress && (
+          <p className="text-red-600 text-sm mt-1">{errors.streetAddress}</p>
+        )}
+
         <input
           type="text"
           name="apartment"
           value={data.apartment}
           onChange={(e) => handleChange(e, isShipping)}
           placeholder="Apartment, suite, unit etc."
-          className="block w-full border px-4 py-2 rounded-md"
+          className={inputClass("apartment")}
         />
       </div>
 
@@ -125,8 +149,11 @@ const AddressForm = ({
           name="town"
           value={data.town}
           onChange={(e) => handleChange(e, isShipping)}
-          className="mt-1 block w-full border px-4 py-2 rounded-md"
+          className={inputClass("town")}
         />
+        {errors.town && (
+          <p className="text-red-600 text-sm mt-1">{errors.town}</p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -137,8 +164,11 @@ const AddressForm = ({
             name="state"
             value={data.state}
             onChange={(e) => handleChange(e, isShipping)}
-            className="mt-1 block w-full border px-4 py-2 rounded-md"
+            className={inputClass("state")}
           />
+          {errors.state && (
+            <p className="text-red-600 text-sm mt-1">{errors.state}</p>
+          )}
         </div>
         <div>
           <label className="text-sm font-medium text-gray-700">
@@ -148,9 +178,15 @@ const AddressForm = ({
             type="text"
             name="zipCode"
             value={data.zipCode}
-            onChange={(e) => handleChange(e, isShipping)}
-            className="mt-1 block w-full border px-4 py-2 rounded-md"
+            onChange={(e) => {
+              const { value } = e.target;
+              if (/^\d{0,5}$/.test(value)) handleChange(e, isShipping);
+            }}
+            className={inputClass("zipCode")}
           />
+          {errors.zipCode && (
+            <p className="text-red-600 text-sm mt-1">{errors.zipCode}</p>
+          )}
         </div>
       </div>
 
@@ -160,9 +196,15 @@ const AddressForm = ({
           type="text"
           name="phone"
           value={data.phone}
-          onChange={(e) => handleChange(e, isShipping)}
-          className="mt-1 block w-full border px-4 py-2 rounded-md"
+          onChange={(e) => {
+            const { value } = e.target;
+            if (/^\d*$/.test(value)) handleChange(e, isShipping);
+          }}
+          className={inputClass("phone")}
         />
+        {errors.phone && (
+          <p className="text-red-600 text-sm mt-1">{errors.phone}</p>
+        )}
       </div>
 
       <div>
@@ -174,7 +216,7 @@ const AddressForm = ({
           name="email"
           value={data.email}
           onChange={(e) => handleChange(e, isShipping)}
-          className={`mt-1 block w-full border px-4 py-2 rounded-md`}
+          className={inputClass("email")}
           disabled={disabledEmail}
           title={
             disabledEmail
@@ -182,6 +224,9 @@ const AddressForm = ({
               : ""
           }
         />
+        {errors.email && (
+          <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+        )}
       </div>
     </>
   );

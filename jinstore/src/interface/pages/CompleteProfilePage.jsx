@@ -4,6 +4,7 @@ import AddressForm from "../components/AddressForm";
 import Breadcrumbs from "../../interface/components/Breadcrumbs";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
+import { validateField } from "../../utils/validation";
 
 const CompleteProfilePage = () => {
   const { user, login } = useAuth();
@@ -24,15 +25,21 @@ const CompleteProfilePage = () => {
     userType: "customer",
   });
 
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     const localUser = user || JSON.parse(localStorage.getItem("user"));
 
     if (localUser) {
-      if (localUser.first_name && localUser.last_name && localUser.email) {
+      if (
+        localUser.first_name &&
+        localUser.last_name &&
+        localUser.email &&
+        !Object.values(errors).some((e) => e)
+      ) {
         const type = localUser.user_type || "customer";
         navigate(type === "vendor" ? "/dashboard" : "/");
       } else {
-        // Prefill form with any existing data
         setProfileData({
           firstName: localUser.first_name || "",
           lastName: localUser.last_name || "",
@@ -48,18 +55,46 @@ const CompleteProfilePage = () => {
           userType: localUser.user_type || "customer",
         });
       }
-    } else {
-      console.log("No user found in context or localStorage");
     }
   }, [user, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfileData((prev) => ({ ...prev, [name]: value }));
+
+    const errorMsg = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: errorMsg }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const requiredFields = [
+      "firstName",
+      "lastName",
+      "email",
+      "phone",
+      "country",
+      "streetAddress",
+      "town",
+      "state",
+      "zipCode",
+    ];
+
+    const newErrors = {};
+    requiredFields.forEach((field) => {
+      const errorMsg = validateField(field, profileData[field]);
+      if (errorMsg) {
+        newErrors[field] = errorMsg;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      toast.error("Please fill all required fields before saving.");
+      return;
+    }
 
     const updatedUser = {
       ...profileData,
@@ -78,9 +113,8 @@ const CompleteProfilePage = () => {
       login(updatedUser, token);
     }
 
-    toast.success("Profile saved locally!");
+    toast.success("Profile saved successfully!");
 
-    // Redirect based on userType after save
     setTimeout(() => {
       navigate(updatedUser.user_type === "vendor" ? "/dashboard" : "/");
     }, 1000);
@@ -92,7 +126,6 @@ const CompleteProfilePage = () => {
         <Breadcrumbs />
       </div>
 
-      {/* Main content - Centered */}
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl mb-6 font-semibold">Complete Your Profile</h1>
         <form onSubmit={handleSubmit}>
@@ -100,6 +133,7 @@ const CompleteProfilePage = () => {
             data={profileData}
             handleChange={handleChange}
             disabledEmail={true}
+            errors={errors}
           />
 
           <button

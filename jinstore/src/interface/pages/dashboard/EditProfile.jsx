@@ -3,13 +3,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import AddressForm from "../../components/AddressForm";
 import { useAuth } from "../../../context/AuthContext";
 import { toast } from "react-hot-toast";
+import { validateField } from "../../../utils/validation";
 
 const EditProfile = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const isEditMode =
-    new URLSearchParams(location.search).get("mode") === "edit";
+  const isEditMode = new URLSearchParams(location.search).get("mode") === "edit";
 
   const [profileData, setProfileData] = useState({
     firstName: "",
@@ -26,16 +26,12 @@ const EditProfile = () => {
     userType: "customer",
   });
 
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     const localUser = user || JSON.parse(localStorage.getItem("user"));
-
     if (localUser) {
-      if (
-        localUser.first_name &&
-        localUser.last_name &&
-        localUser.email &&
-        !isEditMode
-      ) {
+      if (localUser.first_name && localUser.last_name && localUser.email && !isEditMode) {
         const type = localUser.user_type || "customer";
         navigate(type === "vendor" ? "/dashboard" : "/");
       } else {
@@ -54,18 +50,46 @@ const EditProfile = () => {
           userType: localUser.user_type || "customer",
         });
       }
-    } else {
-      console.log("No user found in context or localStorage");
     }
   }, [user, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfileData((prev) => ({ ...prev, [name]: value }));
+
+    const errorMsg = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: errorMsg }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const requiredFields = [
+      "firstName",
+      "lastName",
+      "email",
+      "phone",
+      "country",
+      "streetAddress",
+      "town",
+      "state",
+      "zipCode",
+    ];
+
+    const newErrors = {};
+    requiredFields.forEach((field) => {
+      const errorMsg = validateField(field, profileData[field]);
+      if (errorMsg) {
+        newErrors[field] = errorMsg;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      toast.error("Please fix all errors before submitting.");
+      return;
+    }
 
     const updatedUser = {
       ...profileData,
@@ -93,7 +117,6 @@ const EditProfile = () => {
 
   return (
     <div className="p-6">
-      {/* Main content - Centered */}
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl mb-6 font-semibold">Complete Your Profile</h1>
         <form onSubmit={handleSubmit}>
@@ -101,8 +124,8 @@ const EditProfile = () => {
             data={profileData}
             handleChange={handleChange}
             disabledEmail={true}
+            errors={errors}
           />
-
           <button
             type="submit"
             className="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"

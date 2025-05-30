@@ -7,6 +7,7 @@ import { useCart } from "../../context/CartContext";
 import axios from "axios";
 import AddressForm from "../components/AddressForm";
 import { useAuth } from "../../context/AuthContext";
+// import { validateField } from "../../utils/validation";
 
 const CheckoutPage = () => {
   const { cartItems, clearCart } = useCart();
@@ -129,7 +130,7 @@ const CheckoutPage = () => {
       toast.success("Account created & logged in successfully!");
     } catch (error) {
       console.error("Registration/Login error:", error);
-      toast.error("Failed to create account.");
+      toast.error("User Already Exists.");
     }
   };
 
