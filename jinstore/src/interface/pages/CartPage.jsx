@@ -60,19 +60,19 @@ const CartPage = () => {
   );
 
   return (
-    <div className="bg-white px-4 py-12 relative">
+    <div className="bg-white px-12 py-12 relative">
       {/* Breadcrumbs */}
       <div className="absolute top-4 left-4 text-sm text-gray-500">
         <Breadcrumbs />
       </div>
 
-      <div className="max-w-6xl mx-auto p-12">
+      <div className="max-w-8xl mx-auto py-8 px-2">
         {fullCartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center text-center mt-16">
             <div className="w-40 h-40 mb-6">
               <img src={Svg} alt="Empty cart" className="w-full h-full object-contain" />
             </div>
-            <p className="text-red-600 border border-gray-300 px-14 py-2 rounded text-lg font-medium mb-4">
+          <p className="text-red-600 border border-gray-300 px-4 py-2 rounded text-lg font-medium mb-4">
               Your cart is currently empty
             </p>
             <Link
@@ -85,9 +85,9 @@ const CartPage = () => {
         ) : (
           <>
             {/* Header */}
-            <div className="grid grid-cols-6 font-semibold border-b pb-3 mb-4 text-gray-700 text-sm">
+            <div className="grid grid-cols-6 font-semibold border-b pb-3 mb-4 text-gray-700 text-xs">
               <div className="text-center">Product</div>
-              <div>Description</div>
+              <div>Descrip</div>
               <div className="text-center">Quantity</div>
               <div className="text-center">Price</div>
               <div className="text-center">Amount</div>
@@ -105,15 +105,15 @@ const CartPage = () => {
                   <img
                     src={item?.images[0]?.image_path}
                     alt={item.name}
-                    className="w-24 h-24 object-cover rounded"
+                    className="w-20 h-20 object-cover rounded"
                   />
                 </div>
 
                 {/* Name */}
-                <div className="text-gray-800 font-medium text-base">{item.name}</div>
+                <div className="text-gray-800 font-medium text-base text-xs">{item.name}</div>
 
                 {/* Quantity */}
-                <div className="flex items-center justify-center gap-4 text-lg">
+                <div className="flex items-center justify-center gap-2 text-xs">
                   <button
                     onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
                     className="text-black hover:text-gray-600 cursor-pointer"
@@ -131,12 +131,12 @@ const CartPage = () => {
                 </div>
 
                 {/* Price */}
-                <div className="text-center font-semibold">
+                <div className="text-center font-semibold text-xs">
                   ${item.unit_price.toFixed(2)}
                 </div>
 
                 {/* Amount */}
-                <div className="text-center font-semibold">
+                <div className="text-center font-semibold text-xs">
                   ${(item.unit_price * item.quantity).toFixed(2)}
                 </div>
 
@@ -144,7 +144,7 @@ const CartPage = () => {
                 <div className="text-center">
                   <button
                     onClick={() => handleRemove(item.id, item.name)}
-                    className="text-black text-[30px] hover:text-red-500 cursor-pointer"
+                    className="text-black text-[20px] hover:text-red-500 cursor-pointer"
                   >
                     ×
                   </button>
@@ -154,12 +154,12 @@ const CartPage = () => {
 
             {/* Total & Checkout */}
             <div className="mt-8 flex flex-col items-end">
-              <div className="text-lg font-semibold mb-4">
+              <div className="text-md font-semibold mb-4">
                 Total: ${totalPrice.toFixed(2)}
               </div>
               <Link
                 to="/checkout"
-                className="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 text-sm"
+                className="bg-black text-white px-3 py-3 rounded hover:bg-gray-800 text-sm"
               >
                 Proceed to Checkout
               </Link>

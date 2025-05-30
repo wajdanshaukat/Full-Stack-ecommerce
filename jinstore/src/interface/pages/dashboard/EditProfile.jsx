@@ -87,7 +87,7 @@ const EditProfile = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
-      toast.error("Please fix all errors before submitting.");
+      toast.error("Please fill all required fields before submitting.");
       return;
     }
 

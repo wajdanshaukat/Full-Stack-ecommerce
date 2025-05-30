@@ -47,8 +47,14 @@ function Home() {
 
       {/* Sidebar overlay for small screens */}
       {sidebarOpen && (
-        <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm">
-          <div className="fixed top-0 left-0 w-64 h-full bg-white p-4 shadow-md z-50 overflow-y-auto">
+        <div
+          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm"
+          onClick={() => setSidebarOpen(false)}
+        >
+          <div
+            className="fixed top-0 left-0 w-64 h-full bg-white p-4 shadow-md z-50 overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={() => setSidebarOpen(false)}
               className="text-gray-500 text-2xl"

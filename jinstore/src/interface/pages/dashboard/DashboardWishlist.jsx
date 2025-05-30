@@ -50,8 +50,8 @@ const DashboardWishlist = () => {
       </h2>
 
       {/* Product Grid Section */}
-      <div className="border border-gray-300 rounded-xl overflow-hidden">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4 divide-x divide-y divide-gray-300 bg-white">
+      <div className="border border-gray-300 rounded-xl">
+        <div className="grid xs:girdcol-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 divide-x divide-y divide-gray-300 bg-white">
           {products.length === 0 ? (
             <div className="col-span-full text-center text-gray-500">
               Your wishlist is empty.
