@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from app.routers import product, brand, product_category, blog_post, product_image, auth, protected, user_order, order_detail
+from app.routers import (product, brand, product_category, blog_post, product_image, auth, protected,
+                         user_order, order_detail, wishlist_item, cart_item,)
 from app.database.base import Base
 from app.database.session import engine
 import uvicorn
@@ -38,6 +39,9 @@ app.include_router(user_order.router)
 
 app.include_router(order_detail.router)
 
+app.include_router(wishlist_item.router)
+
+app.include_router(cart_item.router)
 
 app.add_middleware(
     CORSMiddleware,

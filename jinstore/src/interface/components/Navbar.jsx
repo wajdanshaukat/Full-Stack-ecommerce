@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaHeart, FaShoppingCart, FaBars } from "react-icons/fa";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,15 +9,15 @@ import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
 import CartDropdown from "./CartDropdown";
-import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("Home");
+  const [placeholder, setPlaceholder] = useState("");
   const { isAuthenticated, logout, user } = useAuth();
   const { clearCart, getCartCount } = useCart();
   const { wishlist, clearWishlist } = useWishlist();
-  const [activeLink, setActiveLink] = useState("Home");
   const navigate = useNavigate();
 
   const cartRef = useRef(null);
@@ -39,6 +39,23 @@ const Navbar = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width === 768) {
+        setPlaceholder("Search for products...");
+      } else if (width < 768) {
+        setPlaceholder("Search...");
+      } else {
+        setPlaceholder("Search for products, categories or brands...");
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleLinkClick = (link) => {
@@ -84,7 +101,11 @@ const Navbar = () => {
         {/* Left */}
         <div className="flex items-center gap-4">
           <Link to="/" onClick={() => handleLinkClick("Home")}>
-            <img src={logo} alt="Logo" className="h-10 w-auto object-contain cursor-pointer" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-10 w-auto object-contain cursor-pointer"
+            />
           </Link>
           <div className="hidden lg:flex items-center text-sm text-gray-600 hover:text-black cursor-pointer">
             <IoLocationOutline className="mr-1 text-lg" />
@@ -98,10 +119,11 @@ const Navbar = () => {
         <div className="w-full md:w-[70%] relative mx-4">
           <input
             type="text"
-            placeholder="Search for products, categories or brands..."
-            className="w-full border bg-gray-100 border-gray-300 rounded-lg px-4 py-2 pr-28 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            placeholder={placeholder}
+            className="w-full border bg-gray-100 border-gray-300 rounded-lg px-4 py-2 pr-28 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm placeholder:text-gray-500"
+            style={{ zIndex: 1 }}
           />
-          <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-blue-700 text-white text-sm px-4 py-1 rounded-full">
+          <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-blue-700 text-white text-sm px-4 py-1 rounded-full z-20">
             Search
           </button>
         </div>
@@ -115,9 +137,8 @@ const Navbar = () => {
                 className="flex items-center gap-2 hover:text-blue-600"
               >
                 <FaUser className="text-xl" />
-                {`Hello, ${user?.first_name || "User"}`}
+                {`Hello, ${user?.firstName || "User"}`}
               </Link>
-
               <button
                 className="flex items-center gap-2 hover:text-red-500 cursor-pointer"
                 onClick={handleLogout}
@@ -136,7 +157,6 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* Wishlist Icon */}
           <Link to="/wishlist" className="relative hover:text-red-500">
             <FaHeart className="text-lg" />
             {wishlist.length > 0 && (
@@ -146,7 +166,6 @@ const Navbar = () => {
             )}
           </Link>
 
-          {/* Cart Icon + Dropdown */}
           <div className="relative">
             <button
               ref={cartButtonRef}
@@ -172,7 +191,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Hamburger Menu for Mobile */}
+        {/* Hamburger Menu */}
         <button
           className="md:hidden text-xl ml-4"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -181,11 +200,16 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Bottom Navigation */}
+      {/* Bottom Nav */}
       <BottomNav
         menuOpen={menuOpen}
         activeLink={activeLink}
         handleLinkClick={handleLinkClick}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        logout={handleLogout}
+        cartCount={getCartCount()}
+        wishlistCount={wishlist.length}
       />
     </header>
   );

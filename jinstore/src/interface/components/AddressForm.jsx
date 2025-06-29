@@ -17,17 +17,17 @@ const AddressForm = ({
       Object.values(data).every((val) => val === "" || val === "Pakistan")
     ) {
       const prefillFields = {
-        firstName: user.first_name || "",
-        lastName: user.last_name || "",
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
         email: user.email || "",
         phone: user.phone || "",
         country: user.country || "Pakistan",
-        streetAddress: user.street_address || "",
+        streetAddress: user.streetAddress || "",
         apartment: user.apartment || "",
         town: user.town || "",
         state: user.state || "",
-        zipCode: user.zip_code || "",
-        companyName: user.company_name || "",
+        zipCode: user.zipCode || "",
+        companyName: user.companyName || "",
       };
 
       Object.entries(prefillFields).forEach(([name, value]) => {

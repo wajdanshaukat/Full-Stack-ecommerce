@@ -43,9 +43,7 @@ const CartPage = () => {
     updateQuantity(id, quantity);
 
     setFullCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity } : item
-      )
+      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
     );
   };
 
@@ -60,19 +58,23 @@ const CartPage = () => {
   );
 
   return (
-    <div className="bg-white px-12 py-12 relative">
+    <div className="bg-white px-6 py-10 relative">
       {/* Breadcrumbs */}
       <div className="absolute top-4 left-4 text-sm text-gray-500">
         <Breadcrumbs />
       </div>
 
-      <div className="max-w-8xl mx-auto py-8 px-2">
+      <div className="max-w-8xl mx-auto py-10 px-2">
         {fullCartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center text-center mt-16">
             <div className="w-40 h-40 mb-6">
-              <img src={Svg} alt="Empty cart" className="w-full h-full object-contain" />
+              <img
+                src={Svg}
+                alt="Empty cart"
+                className="w-full h-full object-contain"
+              />
             </div>
-          <p className="text-red-600 border border-gray-300 px-4 py-2 rounded text-lg font-medium mb-4">
+            <p className="text-red-600 border border-gray-300 px-4 py-2 rounded text-lg font-medium mb-4">
               Your cart is currently empty
             </p>
             <Link
@@ -84,73 +86,84 @@ const CartPage = () => {
           </div>
         ) : (
           <>
-            {/* Header */}
-            <div className="grid grid-cols-6 font-semibold border-b pb-3 mb-4 text-gray-700 text-xs">
-              <div className="text-center">Product</div>
-              <div>Descrip</div>
-              <div className="text-center">Quantity</div>
-              <div className="text-center">Price</div>
-              <div className="text-center">Amount</div>
-              <div className="text-center">Remove</div>
-            </div>
-
-            {/* Cart Items */}
-            {fullCartItems.map((item) => (
-              <div
-                key={item.id}
-                className="grid grid-cols-6 items-center border-b text-sm"
-              >
-                {/* Image */}
-                <div className="flex justify-center">
-                  <img
-                    src={item?.images[0]?.image_path}
-                    alt={item.name}
-                    className="w-20 h-20 object-cover rounded"
-                  />
+            {/* Responsive Scroll Wrapper for Mobile */}
+            <div className="w-full overflow-x-auto md:overflow-visible">
+              <div className="min-w-[640px]">
+                {/* Header */}
+                <div className="grid grid-cols-6 font-semibold border-b pb-3 mb-4 text-gray-700 text-xs">
+                  <div className="text-center">Product</div>
+                  <div>Description</div>
+                  <div className="text-center">Quantity</div>
+                  <div className="text-center">Price</div>
+                  <div className="text-center">Amount</div>
+                  <div className="text-center">Remove</div>
                 </div>
 
-                {/* Name */}
-                <div className="text-gray-800 font-medium text-base text-xs">{item.name}</div>
-
-                {/* Quantity */}
-                <div className="flex items-center justify-center gap-2 text-xs">
-                  <button
-                    onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                    className="text-black hover:text-gray-600 cursor-pointer"
-                    disabled={item.quantity <= 1}
+                {/* Cart Items */}
+                {fullCartItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="grid grid-cols-6 items-center border-b text-sm"
                   >
-                    ❮
-                  </button>
-                  <span>{item.quantity}</span>
-                  <button
-                    onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                    className="text-black hover:text-gray-600 cursor-pointer"
-                  >
-                    ❯
-                  </button>
-                </div>
+                    {/* Image */}
+                    <div className="flex justify-center">
+                      <img
+                        src={item?.images[0]?.image_path}
+                        alt={item.name}
+                        className="w-20 h-20 object-cover rounded"
+                      />
+                    </div>
 
-                {/* Price */}
-                <div className="text-center font-semibold text-xs">
-                  ${item.unit_price.toFixed(2)}
-                </div>
+                    {/* Name */}
+                    <div className="text-gray-800 font-medium text-base text-xs">
+                      {item.name}
+                    </div>
 
-                {/* Amount */}
-                <div className="text-center font-semibold text-xs">
-                  ${(item.unit_price * item.quantity).toFixed(2)}
-                </div>
+                    {/* Quantity */}
+                    <div className="flex items-center justify-center gap-2 text-xs">
+                      <button
+                        onClick={() =>
+                          handleQuantityChange(item.id, item.quantity - 1)
+                        }
+                        className="text-black hover:text-gray-600 cursor-pointer"
+                        disabled={item.quantity <= 1}
+                      >
+                        ❮
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button
+                        onClick={() =>
+                          handleQuantityChange(item.id, item.quantity + 1)
+                        }
+                        className="text-black hover:text-gray-600 cursor-pointer"
+                      >
+                        ❯
+                      </button>
+                    </div>
 
-                {/* Remove */}
-                <div className="text-center">
-                  <button
-                    onClick={() => handleRemove(item.id, item.name)}
-                    className="text-black text-[20px] hover:text-red-500 cursor-pointer"
-                  >
-                    ×
-                  </button>
-                </div>
+                    {/* Price */}
+                    <div className="text-center font-semibold text-xs">
+                      ${item.unit_price.toFixed(2)}
+                    </div>
+
+                    {/* Amount */}
+                    <div className="text-center font-semibold text-xs">
+                      ${(item.unit_price * item.quantity).toFixed(2)}
+                    </div>
+
+                    {/* Remove */}
+                    <div className="text-center">
+                      <button
+                        onClick={() => handleRemove(item.id, item.name)}
+                        className="text-black text-[20px] hover:text-red-500 cursor-pointer"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
 
             {/* Total & Checkout */}
             <div className="mt-8 flex flex-col items-end">

@@ -10,6 +10,17 @@ class UserOrderBase(BaseModel):
     payment_status: PaymentStatusEnum
     shipping_method: ShippingMethodEnum
 
+    shipping_first_name : Optional[str] = None
+    shipping_last_name : Optional[str] = None
+    shipping_company_name : Optional[str] = None
+    shipping_phone_number : Optional[str] = None
+    shipping_address_line_1 : Optional[str] = None
+    shipping_address_line_2 : Optional[str] = None
+    shipping_city : Optional[str] = None
+    shipping_state : Optional[str] = None
+    shipping_zip_code : Optional[str] = None
+    shipping_country : Optional[str] = None
+
 
 class UserOrderCreate(UserOrderBase):
     order_details: Optional[List[OrderDetailCreate]] = None

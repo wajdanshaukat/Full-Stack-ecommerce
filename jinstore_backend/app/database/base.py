@@ -5,9 +5,7 @@ from sqlalchemy.orm import sessionmaker
 # Create the base class
 Base = declarative_base()
 
-# DATABASE_URL = "sqlite:///./ecommerce.db"
-DATABASE_URL = "sqlite:///./ecommerce1.db"
-
+DATABASE_URL = "sqlite:///./ecommerce.db"
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 

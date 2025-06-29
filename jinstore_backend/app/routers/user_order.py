@@ -20,7 +20,18 @@ def create_order(order_data: UserOrderCreate, db: Session = Depends(get_db), cur
         payment_status=order_data.payment_status,
         shipping_method=order_data.shipping_method,
         created_at=datetime.utcnow(),
-        placed_at=datetime.utcnow()
+        placed_at=datetime.utcnow(),
+
+        shipping_first_name = order_data.shipping_first_name,
+        shipping_last_name = order_data.shipping_last_name,
+        shipping_company_name = order_data.shipping_company_name,
+        shipping_phone_number = order_data.shipping_phone_number,
+        shipping_address_line_1 = order_data.shipping_address_line_1,
+        shipping_address_line_2 = order_data.shipping_address_line_2,
+        shipping_city = order_data.shipping_city,
+        shipping_state = order_data.shipping_state,
+        shipping_zip_code = order_data.shipping_zip_code,
+        shipping_country = order_data.shipping_country,
     )
 
     db.add(new_order)

@@ -74,7 +74,7 @@ const DashboardLayout = () => {
   );
 
   return (
-    <div className="px-4 py-6">
+    <div className="px-2 py-6">
       <div className="mb-4 flex justify-between items-center">
         <Breadcrumbs />
         <button
@@ -86,7 +86,7 @@ const DashboardLayout = () => {
         </button>
       </div>
 
-      <div className="flex gap-6">
+      <div className="flex-col lg:flex lg:flex-row gap-6">
         {/* Sidebar for large screens */}
         <aside className="hidden lg:block w-[260px] bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <SidebarContent />
@@ -114,7 +114,7 @@ const DashboardLayout = () => {
         )}
 
         {/* Main content */}
-        <main className="flex-1 bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+        <main className="flex-1 bg-white border border-gray-200 rounded-xl p-2 shadow-sm">
           <Outlet />
         </main>
       </div>

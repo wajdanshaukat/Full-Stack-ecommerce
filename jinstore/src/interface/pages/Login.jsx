@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
+import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../context/CartContext";
 import { toast } from "react-hot-toast";
 
 const LoginForm = () => {
@@ -10,6 +12,8 @@ const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { setToken } = useWishlist();
+  const { setToken: setCartToken } = useCart();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,20 +30,24 @@ const LoginForm = () => {
         localStorage.setItem("authToken", token);
       }
 
-      const profileRes = await axios.get("http://localhost:8000/protected/profile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const profileRes = await axios.get(
+        "http://localhost:8000/protected/profile",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const userData = profileRes.data;
 
       await login(userData, token);
+      setToken(token);
+      setCartToken(token);
 
       toast.success("Welcome back!");
 
-      // ✅ Check if profile is complete
-      const isProfileComplete = userData.first_name && userData.last_name;
+      const isProfileComplete = userData.firstName && userData.lastName;
 
       if (!isProfileComplete) {
         navigate("/complete-profile");
@@ -98,7 +106,10 @@ const LoginForm = () => {
               />
               Remember me
             </label>
-            <Link to="/forgot-password" className="text-blue-500 hover:underline">
+            <Link
+              to="/forgot-password"
+              className="text-blue-500 hover:underline"
+            >
               Lost your password?
             </Link>
           </div>

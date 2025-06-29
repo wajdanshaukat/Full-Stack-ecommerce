@@ -52,10 +52,14 @@ const OrderDetails = () => {
   );
 
   return (
-    <div className="p-12">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Order #{id} Details</h1>
-        <div className="flex items-center gap-2">
+    <div className="p-4 md:p-12">
+      <div className="flex flex-wrap md:flex-nowrap md:justify-between md:items-center items-start gap-4 mb-6">
+        <h1 className="text-2xl font-semibold whitespace-nowrap">
+          Order #{id} Details
+        </h1>
+
+        {/* Filters */}
+        <div className="flex flex-wrap gap-2 justify-start md:justify-end flex-1 md:flex-none">
           <select className="border px-2 py-1 rounded text-sm">
             <option>All</option>
           </select>
@@ -78,48 +82,52 @@ const OrderDetails = () => {
         </div>
       </div>
 
-      <div className=" bg-white rounded-lg shadow">
-        <table className="min-w-full">
-          <thead className="bg-[#f6f5ff] text-gray-600 text-sm">
-            <tr>
-              <th className="p-4 text-left">
-                <input type="checkbox" />
-              </th>
-              <th className="p-4 text-left">Product ID</th>
-              <th className="p-4 text-left">Product Name</th>
-              <th className="p-4 text-left">Price</th>
-              <th className="p-4 text-left">Quantity</th>
-              <th className="p-4 text-left">Total</th>
-              <th className="p-4 text-left">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orderDetails.map((item, index) => (
-              <tr key={index} className="border-t">
-                <td className="p-4">
+      {/* Responsive Scroll Wrapper */}
+      <div className="w-full overflow-x-auto md:overflow-visible bg-white rounded-lg shadow">
+        <div className="min-w-[640px]">
+          <table className="w-full">
+            <thead className="bg-[#f6f5ff] text-gray-600 text-sm">
+              <tr>
+                <th className="p-4 text-left">
                   <input type="checkbox" />
-                </td>
-                <td className="p-4 text-red-500 font-medium">
-                  {item.product_id}
-                </td>
-                <td className="p-4">{item.product_name}</td>
-                <td className="p-4">${item.unit_price.toFixed(2)}</td>
-                <td className="p-4">{item.quantity}</td>
-                <td className="p-4">
-                  ${(item.unit_price * item.quantity).toFixed(2)}
-                </td>
-                <td className="p-4">
-                  <span
-                    className={`px-2 py-1 text-xs font-medium rounded ${statusColor["Completed"]}`}
-                  >
-                    Completed
-                  </span>
-                </td>
+                </th>
+                <th className="p-4 text-left">Product ID</th>
+                <th className="p-4 text-left">Product Name</th>
+                <th className="p-4 text-left">Price</th>
+                <th className="p-4 text-left">Quantity</th>
+                <th className="p-4 text-left">Total</th>
+                <th className="p-4 text-left">Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orderDetails.map((item, index) => (
+                <tr key={index} className="border-t">
+                  <td className="p-4">
+                    <input type="checkbox" />
+                  </td>
+                  <td className="p-4 text-red-500 font-medium">
+                    {item.product_id}
+                  </td>
+                  <td className="p-4">{item.product_name}</td>
+                  <td className="p-4">${item.unit_price.toFixed(2)}</td>
+                  <td className="p-4">{item.quantity}</td>
+                  <td className="p-4">
+                    ${(item.unit_price * item.quantity).toFixed(2)}
+                  </td>
+                  <td className="p-4">
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded ${statusColor["Completed"]}`}
+                    >
+                      Completed
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
+
       <div className="flex justify-end p-6 text-right text-xl font-bold text-gray-800">
         Order Total: ${totalPrice.toFixed(2)}
       </div>

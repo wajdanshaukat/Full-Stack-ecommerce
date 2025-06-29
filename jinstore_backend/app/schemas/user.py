@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Optional
 from pydantic import BaseModel
 
 class UserTypeEnum(str, Enum):
@@ -14,6 +15,16 @@ class UserOut(BaseModel):
     id: int
     email: str
     user_type: UserTypeEnum
+    firstName: Optional[str]
+    lastName: Optional[str]
+    companyName: Optional[str]
+    phone: Optional[str]
+    streetAddress: Optional[str]
+    apartment: Optional[str]
+    town: Optional[str]
+    state: Optional[str]
+    zipCode: Optional[str]
+    country: Optional[str]
 
 class LoginRequest(BaseModel):
     email: str
@@ -21,3 +32,15 @@ class LoginRequest(BaseModel):
 
     class Config:
         from_attribute = True
+
+class UserUpdate(BaseModel):
+    firstName: Optional[str]
+    lastName: Optional[str]
+    companyName: Optional[str]
+    phone: Optional[str]
+    streetAddress: Optional[str]
+    apartment: Optional[str]
+    town: Optional[str]
+    state: Optional[str]
+    zipCode: Optional[str]
+    country: Optional[str]

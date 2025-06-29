@@ -1,8 +1,8 @@
 import React from "react";
 
 const UserInfo = ({ user }) => {
-  const fullName = `${user.first_name} ${user.last_name}`;
-  const billingAddress = `${user.street_address} ${user.apartment}, ${user.town}, ${user.state}, ${user.country}, ${user.zip_code}`;
+  const fullName = `${user.firstName} ${user.lastName}`;
+  const billingAddress = `${user.streetAddress} ${user.apartment}, ${user.town}, ${user.state}, ${user.country}, ${user.zipCode}`;
   const shippingDifferent = user.shipping_address && user.shipping_address !== billingAddress;
 
   return (
@@ -22,10 +22,10 @@ const UserInfo = ({ user }) => {
         <p>{user.phone}</p>
       </div>
 
-      {user.company_name && (
+      {user.companyName && (
         <div>
           <h2 className="text-xl font-semibold">Company</h2>
-          <p>{user.company_name}</p>
+          <p>{user.companyName}</p>
         </div>
       )}
 

@@ -31,22 +31,22 @@ const EditProfile = () => {
   useEffect(() => {
     const localUser = user || JSON.parse(localStorage.getItem("user"));
     if (localUser) {
-      if (localUser.first_name && localUser.last_name && localUser.email && !isEditMode) {
+      if (localUser.firstName && localUser.lastName && localUser.email && !isEditMode) {
         const type = localUser.user_type || "customer";
         navigate(type === "vendor" ? "/dashboard" : "/");
       } else {
         setProfileData({
-          firstName: localUser.first_name || "",
-          lastName: localUser.last_name || "",
+          firstName: localUser.firstName || "",
+          lastName: localUser.lastName || "",
           email: localUser.email || "",
           phone: localUser.phone || "",
           country: localUser.country || "Pakistan",
-          streetAddress: localUser.street_address || "",
+          streetAddress: localUser.streetAddress || "",
           apartment: localUser.apartment || "",
           town: localUser.town || "",
           state: localUser.state || "",
-          zipCode: localUser.zip_code || "",
-          companyName: localUser.company_name || "",
+          zipCode: localUser.zipCode || "",
+          companyName: localUser.companyName || "",
           userType: localUser.user_type || "customer",
         });
       }
@@ -61,9 +61,9 @@ const EditProfile = () => {
     setErrors((prev) => ({ ...prev, [name]: errorMsg }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const requiredFields = [
       "firstName",
       "lastName",
@@ -75,7 +75,7 @@ const EditProfile = () => {
       "state",
       "zipCode",
     ];
-
+  
     const newErrors = {};
     requiredFields.forEach((field) => {
       const errorMsg = validateField(field, profileData[field]);
@@ -83,37 +83,70 @@ const EditProfile = () => {
         newErrors[field] = errorMsg;
       }
     });
-
+  
     setErrors(newErrors);
-
+  
     if (Object.keys(newErrors).length > 0) {
       toast.error("Please fill all required fields before submitting.");
       return;
     }
-
+  
     const updatedUser = {
-      ...profileData,
-      first_name: profileData.firstName,
-      last_name: profileData.lastName,
-      street_address: profileData.streetAddress,
-      zip_code: profileData.zipCode,
-      company_name: profileData.companyName,
+      firstName: profileData.firstName,
+      lastName: profileData.lastName,
+      email: profileData.email,
+      phone: profileData.phone,
+      country: profileData.country,
+      streetAddress: profileData.streetAddress,
+      apartment: profileData.apartment,
+      town: profileData.town,
+      state: profileData.state,
+      zipCode: profileData.zipCode,
+      companyName: profileData.companyName,
       user_type: profileData.userType,
     };
-
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-
+  
     const token = localStorage.getItem("token");
-    if (login && token) {
-      login(updatedUser, token);
+  
+    try {
+      const response = await fetch("http://127.0.0.1:8000/protected/update-profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedUser),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to update profile");
+      }
+  
+      const data = await response.json();
+  
+      // Update localStorage and context
+      const mergedUser = {
+        ...data,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        streetAddress: data.streetAddress,
+        zipCode: data.zipCode,
+        companyName: data.companyName,
+        userType: data.user_type,
+      };
+  
+      localStorage.setItem("user", JSON.stringify(mergedUser));
+      if (login && token) login(mergedUser, token);
+  
+      toast.success("Profile updated successfully!");
+      setTimeout(() => {
+        navigate(mergedUser.userType === "vendor" ? "/dashboard" : "/");
+      }, 1000);
+    } catch (err) {
+      toast.error("An error occurred while updating your profile.");
+      console.error(err);
     }
-
-    toast.success("Profile saved locally!");
-
-    setTimeout(() => {
-      navigate(updatedUser.user_type === "vendor" ? "/dashboard" : "/");
-    }, 1000);
-  };
+  };  
 
   return (
     <div className="p-6">

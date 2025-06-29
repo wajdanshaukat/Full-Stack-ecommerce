@@ -8,7 +8,6 @@ import {
   FaInstagram,
   FaUserCircle,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const POSTS_PER_PAGE = 3;
 
@@ -31,7 +30,7 @@ const Blog = () => {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       {/* Breadcrumbs */}
       <div className="max-w-8xl mx-auto px-4 py-4">
         <Breadcrumbs />

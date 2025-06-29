@@ -28,7 +28,7 @@ const SignUp = () => {
 
       const token = loginRes.data.access_token;
 
-      const profileRes = await axios.get("http://localhost:8000/protected/profile", {
+      const profileRes = await axios.get("http://localhost:8000/protected/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
 

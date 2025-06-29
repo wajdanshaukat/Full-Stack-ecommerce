@@ -7,7 +7,7 @@ import { useCart } from "../../context/CartContext";
 import axios from "axios";
 import AddressForm from "../components/AddressForm";
 import { useAuth } from "../../context/AuthContext";
-// import { validateField } from "../../utils/validation";
+import { validateField } from "../../utils/validation";
 
 const CheckoutPage = () => {
   const { cartItems, clearCart } = useCart();
@@ -32,8 +32,35 @@ const CheckoutPage = () => {
     paymentMethod: "Direct Bank Transfer",
   };
 
+  const [errors, setErrors] = useState({});
+
   const [formData, setFormData] = useState(defaultForm);
   const [shippingData, setShippingData] = useState(defaultForm);
+
+  const validateForm = (data) => {
+    let tempErrors = {};
+
+    const requiredFields = [
+      "firstName",
+      "lastName",
+      "email",
+      "phone",
+      "country",
+      "streetAddress",
+      "town",
+      "state",
+      "zipCode",
+    ];
+
+    requiredFields.forEach((field) => {
+      const error = validateField(field, data[field]);
+      if (error) {
+        tempErrors[field] = error;
+      }
+    });
+
+    return tempErrors;
+  };
 
   // ✅ Autofill form if logged in, or restore from localStorage
   useEffect(() => {
@@ -41,11 +68,13 @@ const CheckoutPage = () => {
       setFormData((prev) => ({
         ...prev,
         email: user.email || "",
-        firstName: user.first_name || "",
-        lastName: user.last_name || "",
+        firstName: user.firstName || "",
+        companyName: user.companyName || "",
+        lastName: user.lastName || "",
         phone: user.phone || "",
         country: user.country || "Pakistan",
-        streetAddress: user.street_address || "",
+        streetAddress: user.streetAddress || "",
+        apartment: user.apartment || "",
         town: user.town || "",
         state: user.state || "",
         zipCode: user.zipCode || "",
@@ -74,8 +103,13 @@ const CheckoutPage = () => {
   };
 
   const handleCreateAccount = async () => {
-    if (!formData.email) {
-      toast.error("Email is required to create an account.");
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      toast.error(
+        "Please fill all required fields before creating an account."
+      );
       return;
     }
 
@@ -83,17 +117,8 @@ const CheckoutPage = () => {
       await axios.post("http://localhost:8000/auth/register", {
         email: formData.email,
         password: "defaultpassword",
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        phone: formData.phone,
-        country: formData.country,
-        street_address: formData.streetAddress,
-        town: formData.town,
-        state: formData.state,
-        zipCode: formData.zipCode,
         user_type: "customer",
       });
-      
 
       const loginRes = await axios.post(
         "http://localhost:8000/auth/login/",
@@ -110,13 +135,37 @@ const CheckoutPage = () => {
 
       const token = loginRes.data.access_token;
 
+      await axios.put(
+        "http://localhost:8000/protected/update-profile",
+        {
+          email: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          companyName: formData.companyName,
+          country: formData.country,
+          streetAddress: formData.streetAddress,
+          apartment: formData.apartment,
+          town: formData.town,
+          state: formData.state,
+          zipCode: formData.zipCode,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       const userData = {
         email: formData.email,
-        first_name: formData.firstName,
-        last_name: formData.lastName,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
         phone: formData.phone,
         country: formData.country,
-        street_address: formData.streetAddress,
+        streetAddress: formData.streetAddress,
+        apartment: formData.apartment,
+        companyName: formData.companyName,
         town: formData.town,
         state: formData.state,
         zipCode: formData.zipCode,
@@ -127,10 +176,13 @@ const CheckoutPage = () => {
       localStorage.setItem("token", token);
       login(userData, token);
 
-      toast.success("Account created & logged in successfully!");
+      toast.success("Account created & profile saved!");
     } catch (error) {
-      console.error("Registration/Login error:", error);
-      toast.error("User Already Exists.");
+      console.error(
+        "Error creating account:",
+        error.response?.data || error.message
+      );
+      toast.error("Account creation failed.");
     }
   };
 
@@ -140,7 +192,6 @@ const CheckoutPage = () => {
     navigate("/thank-you", { state: { orderId } });
   };
 
-
   const handlePlaceOrder = async () => {
     if (!isAuthenticated) {
       toast.error("You need to login first.");
@@ -148,12 +199,30 @@ const CheckoutPage = () => {
     }
 
     if (cartItems.length === 0) {
-      toast.error("Your cart is empty. Please add products before placing an order.");
+      toast.error(
+        "Your cart is empty. Please add products before placing an order."
+      );
+      return;
+    }
+
+    const billingErrors = validateForm(formData);
+    const isShippingDifferent =
+      formData.differentAddress === true ||
+      formData.differentAddress === "true";
+    const shippingErrors = isShippingDifferent
+      ? validateForm(shippingData)
+      : {};
+
+    const combinedErrors = { ...billingErrors, ...shippingErrors };
+    setErrors(combinedErrors);
+
+    if (Object.keys(combinedErrors).length > 0) {
+      toast.error("Please fill all required fields before placing your order.");
       return;
     }
 
     const billing = formData;
-    const shipping = formData.differentAddress ? shippingData : formData;
+    const shipping = isShippingDifferent ? shippingData : formData;
 
     // Map your frontend shippingMethod values to backend enum:
     const shippingMethodMap = {
@@ -166,25 +235,31 @@ const CheckoutPage = () => {
 
     const payload = {
       user_id: user?.id,
-      billing_first_name: billing.firstName,
-      billing_last_name: billing.lastName,
-      billing_email: billing.email,
-      billing_phone: billing.phone,
-      billing_country: billing.country,
-      billing_address: billing.streetAddress,
-      billing_city: billing.town,
-      billing_state: billing.state,
-      billing_zip: billing.zipCode,
+      firstName: billing.firstName,
+      lastName: billing.lastName,
+      companyName: billing.companyName,
+      apartment: billing.apartment,
+      email: billing.email,
+      phone: billing.phone,
+      country: billing.country,
+      streetAddress: billing.streetAddress,
+      town: billing.town,
+      state: billing.state,
+      zipCode: billing.zipCode,
 
-      shipping_to_different: formData.differentAddress,
-
-      shipping_first_name: shipping.firstName,
-      shipping_last_name: shipping.lastName,
-      shipping_country: shipping.country,
-      shipping_address: shipping.streetAddress,
-      shipping_city: shipping.town,
-      shipping_state: shipping.state,
-      shipping_zip: shipping.zipCode,
+      shipping_to_different: isShippingDifferent,
+      ...(isShippingDifferent && {
+        shipping_first_name: shipping.firstName,
+        shipping_last_name: shipping.lastName,
+        shipping_company_name: shipping.companyName,
+        shipping_phone_number: shipping.phone,
+        shipping_address_line_1: shipping.streetAddress,
+        shipping_address_line_2: shipping.apartment,
+        shipping_country: shipping.country,
+        shipping_city: shipping.town,
+        shipping_state: shipping.state,
+        shipping_zip_code: shipping.zipCode,
+      }),
 
       shipping_method: shippingMethodMap[billing.shippingMethod] || "Standard",
       payment_method: formData.paymentMethod,
@@ -200,17 +275,20 @@ const CheckoutPage = () => {
         product_name: item.name,
         unit_price: item.unit_price,
         quantity: item.quantity,
-      }))
+      })),
     };
     console.log("Mapped Order Details:", payload);
-      
 
     try {
-      const response = await axios.post("http://localhost:8000/orders/", payload, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:8000/orders/",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       const orderId = response.data.id;
       handleOrderSuccess(orderId);
@@ -220,7 +298,6 @@ const CheckoutPage = () => {
     }
   };
 
-  
   return (
     <div className="bg-white">
       <Toaster position="top-right" />
@@ -237,6 +314,7 @@ const CheckoutPage = () => {
                 data={formData}
                 handleChange={handleInputChange}
                 disabledEmail={isAuthenticated}
+                errors={errors}
               />
 
               <div className="space-y-4">
@@ -286,6 +364,7 @@ const CheckoutPage = () => {
                     data={shippingData}
                     handleChange={handleInputChange}
                     isShipping
+                    errors={errors}
                   />
                 </form>
               </div>

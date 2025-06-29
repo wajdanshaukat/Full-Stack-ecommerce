@@ -5,6 +5,7 @@ import Breadcrumbs from "../../interface/components/Breadcrumbs";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { validateField } from "../../utils/validation";
+import axios from "axios";
 
 const CompleteProfilePage = () => {
   const { user, login } = useAuth();
@@ -32,8 +33,8 @@ const CompleteProfilePage = () => {
 
     if (localUser) {
       if (
-        localUser.first_name &&
-        localUser.last_name &&
+        localUser.firstName &&
+        localUser.lastName &&
         localUser.email &&
         !Object.values(errors).some((e) => e)
       ) {
@@ -41,17 +42,17 @@ const CompleteProfilePage = () => {
         navigate(type === "vendor" ? "/dashboard" : "/");
       } else {
         setProfileData({
-          firstName: localUser.first_name || "",
-          lastName: localUser.last_name || "",
+          firstName: localUser.firstName || "",
+          lastName: localUser.lastName || "",
           email: localUser.email || "",
           phone: localUser.phone || "",
           country: localUser.country || "Pakistan",
-          streetAddress: localUser.street_address || "",
+          streetAddress: localUser.streetAddress || "",
           apartment: localUser.apartment || "",
           town: localUser.town || "",
           state: localUser.state || "",
-          zipCode: localUser.zip_code || "",
-          companyName: localUser.company_name || "",
+          zipCode: localUser.zipCode || "",
+          companyName: localUser.companyName || "",
           userType: localUser.user_type || "customer",
         });
       }
@@ -66,58 +67,66 @@ const CompleteProfilePage = () => {
     setErrors((prev) => ({ ...prev, [name]: errorMsg }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const requiredFields = [
       "firstName",
       "lastName",
-      "email",
       "phone",
       "country",
       "streetAddress",
+      "apartment",
       "town",
       "state",
       "zipCode",
+      "companyName",
+      "userType",
     ];
-
+    
+  
     const newErrors = {};
     requiredFields.forEach((field) => {
-      const errorMsg = validateField(field, profileData[field]);
-      if (errorMsg) {
-        newErrors[field] = errorMsg;
+      if (!profileData[field]?.trim()) {
+        newErrors[field] = "This field is required";
       }
     });
-
+  
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length > 0) {
       toast.error("Please fill all required fields before saving.");
       return;
     }
-
-    const updatedUser = {
-      ...profileData,
-      first_name: profileData.firstName,
-      last_name: profileData.lastName,
-      street_address: profileData.streetAddress,
-      zip_code: profileData.zipCode,
-      company_name: profileData.companyName,
-      user_type: profileData.userType,
-    };
-
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-
+  
     const token = localStorage.getItem("token");
-    if (login && token) {
-      login(updatedUser, token);
+    if (!token) {
+      toast.error("You are not authenticated.");
+      return;
     }
-
-    toast.success("Profile saved successfully!");
-
-    setTimeout(() => {
-      navigate(updatedUser.user_type === "vendor" ? "/dashboard" : "/");
-    }, 1000);
+  
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/protected/complete-profile",
+        profileData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      const updatedUser = response.data;
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      login(updatedUser, token);
+      toast.success("Profile saved successfully!");
+  
+      setTimeout(() => {
+        navigate(updatedUser.user_type === "vendor" ? "/dashboard" : "/");
+      }, 1000);
+    } catch (error) {
+      toast.error("Failed to save profile.");
+      console.error(error);
+    }
   };
 
   return (
